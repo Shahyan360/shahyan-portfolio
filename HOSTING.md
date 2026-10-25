@@ -4,7 +4,7 @@ Production portfolio: https://shahyan-khalid-360.vercel.app
 Repository: https://github.com/Shahyan360/shahyan-portfolio
 Vercel project: prj_WAsrZd1De7dicBEatqyX8Mho43t0
 
-Push main to deploy automatically. Build from the repository root with Node 24, npm ci, npm run build, and output out/. Do not add a SPA catch-all: each route has its own exported HTML. vercel.json records the build and security headers. The canonical origin is centralized in src/lib/site.ts; NEXT_PUBLIC_SITE_URL is an optional public configuration override. There was no Vercel environment override at audit time.
+Push main to deploy automatically. Build from the repository root with Node 24, npm ci and npm run build. For Vercel's Next.js framework integration, leave Output Directory unset: it discovers the static export automatically and still reads Next's build manifests. Setting it explicitly to out makes that builder look for manifests in the wrong place. A generic static host can serve out/ directly. Do not add a SPA catch-all: each route has its own exported HTML. vercel.json records the build and security headers. The canonical origin is centralized in src/lib/site.ts; NEXT_PUBLIC_SITE_URL is an optional public configuration override. There was no Vercel environment override at audit time.
 
 ## Verified application mapping
 

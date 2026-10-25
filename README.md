@@ -59,7 +59,7 @@ Tests check all routes, metadata, navigation, four widths (320/390/768/1440), im
 
 Production is `https://shahyan-khalid-360.vercel.app`. Push to `main` in `Shahyan360/shahyan-portfolio`; its connected Vercel project builds and deploys automatically. `.openai/hosting.json` records the original preview service and is not used for the current GitHub-to-Vercel production deployment.
 
-For Vercel or another static host, use build command `npm run build`, output `out`, Node 24, and no SPA catch-all rewrite. Keep existing three-product embed allowlists in sync with the chosen portfolio origin. Security header templates are in `HOSTING.md`.
+For Vercel, use the Next.js framework integration, build command `npm run build`, Node 24 and an automatic/unset Output Directory. Its Next.js builder discovers the export; forcing `out` there misdirects its manifest lookup. A generic static host can serve `out` directly. Do not add a SPA catch-all rewrite. Keep all three product embed allowlists in sync with the chosen portfolio origin. Security headers are in `HOSTING.md`.
 
 Run the same browser suite against production by setting the non-secret `BASE_URL` to `https://shahyan-khalid-360.vercel.app` before `npm run test:e2e`. Production tests do not start a local server, send email, invoke live inference, or change private workspace data. Recoverability checks use explicitly intercepted fictional test documents in the browser test context.
 

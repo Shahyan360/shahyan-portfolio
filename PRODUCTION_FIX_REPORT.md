@@ -46,6 +46,8 @@ Before publication: strict typecheck, ESLint, production static export, dependen
 
 Public production verification is recorded after the Git-triggered portfolio deployment; see the completion update in this report and ignored `qa/production-results.json` when available. The test suite can target production through `BASE_URL` without starting a local server. Failure/restricted-state fixtures are intercepted fictional documents in the test context, while the real embed checks use the actual hosted applications.
 
+The first portfolio release attempt hit Vercel's `NEXT_NO_ROUTES_MANIFEST` because an explicit `out` override conflicts with its Next.js framework builder. That override was removed; static export remains enabled, and the framework integration selects its build output automatically. The failed attempt was not promoted over the existing public site.
+
 ## Remaining access boundaries
 
 Meridian exposes its public website; its real workspace still requires its own owner account. The portfolio neither supplies admin credentials nor shares a private session. Browser cookie policies or a future external outage may still limit an embedded application; the viewer will explain unconfirmed loading and offer external opening. No account or permission change is needed to explore Lizz's or Aster's public demonstration.
