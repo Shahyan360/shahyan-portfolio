@@ -61,8 +61,8 @@ test('internal links resolve to exported routes', async ({ page, request }) => {
   expect((await request.get('/a-page-that-does-not-exist/')).status()).toBe(404);
 });
 
-test('native navigation reaches case studies and returns without prefetch failures', async ({ page }) => {
-  const failures: string[] = []; page.on('response', response => { if (response.status() >= 400 && response.url().includes('127.0.0.1')) failures.push(response.url()); });
+test('native navigation reaches case studies and returns without prefetch failures', async ({ page, baseURL }) => {
+  const failures: string[] = []; page.on('response', response => { if (response.status() >= 400 && response.url().startsWith(baseURL!)) failures.push(response.url()); });
   await page.goto('/'); await page.getByRole('link', { name: 'Explore my work', exact: true }).click(); await expect(page).toHaveURL(/\/work\/$/);
   await page.getByRole('link', { name: 'Explore project: Lizz case study', exact: true }).click(); await expect(page.locator('h1')).toHaveText('Lizz.');
   await page.getByRole('link', { name: 'All work', exact: false }).click(); await expect(page.locator('.project-card')).toHaveCount(5); expect(failures).toEqual([]);
@@ -78,10 +78,18 @@ for (const build of [{ slug: 'lizz', name: 'Lizz', expected: /A little room to b
   test(`real ${build.name} build renders inside the portfolio`, async ({ page }) => {
     await page.goto(`/work/${build.slug}/#live-build`); const viewer = page.locator('.live-project');
     await expect(viewer.getByRole('link', { name: 'Open externally' })).toHaveAttribute('target', '_blank');
+    const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
     await viewer.getByRole('button', { name: /Launch interactive/ }).click(); const frame = page.frameLocator('iframe'); await expect(frame.locator('body')).toContainText(build.expected, { timeout: 25000 });
+    await expect(viewer).toHaveAttribute('data-state', 'ready', { timeout: 20000 });
     if (build.slug === 'lizz') { await frame.getByRole('button', { name: 'Inbox 7', exact: true }).click(); await expect(frame.getByRole('heading', { name: 'Your inbox, in focus.' })).toBeVisible(); }
-    await viewer.getByRole('button', { name: 'Expand' }).click(); await expect(viewer).toHaveClass(/expanded/); await page.keyboard.press('Escape'); await expect(viewer).not.toHaveClass(/expanded/);
+    await viewer.getByRole('button', { name: 'Expand' }).click(); await expect(viewer).toHaveClass(/expanded/);
+    await frame.locator('body').press('Escape'); await expect(viewer).not.toHaveClass(/expanded/);
+    await viewer.getByRole('button', { name: `Reload ${build.name}`, exact: true }).click();
+    await expect(viewer).toHaveAttribute('data-state', 'ready', { timeout: 20000 });
+    await viewer.getByRole('button', { name: `Close ${build.name} viewer`, exact: true }).click();
+    await expect(viewer.locator('iframe')).toHaveCount(0); await expect(viewer).toHaveAttribute('data-state', 'idle');
+    expect(errors).toEqual([]);
   });
 }
 
-test('homepage live build selector switches between three products', async ({ page }) => { await page.goto('/'); const gallery = page.locator('.live-gallery'); await gallery.getByRole('button', { name: 'Aster ERP' }).click(); await expect(gallery.locator('.live-project')).toHaveAttribute('aria-label', 'Aster ERP interactive website'); await gallery.getByRole('button', { name: 'Meridian ERP' }).click(); await expect(gallery.getByRole('heading', { name: 'Step inside Meridian ERP.' })).toBeVisible(); });
+test('homepage live build selector switches between three products', async ({ page }) => { await page.goto('/'); const gallery = page.locator('.live-gallery'); await gallery.getByRole('button', { name: 'Aster ERP' }).click(); await expect(gallery.locator('.live-project:visible')).toHaveAttribute('aria-label', 'Aster ERP interactive website'); await gallery.getByRole('button', { name: 'Meridian ERP' }).click(); await expect(gallery.getByRole('heading', { name: 'Step inside Meridian ERP.' })).toBeVisible(); });

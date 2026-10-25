@@ -1,5 +1,7 @@
 # Verification — 25 October 2026
 
+This document records the original build baseline. For the subsequent public-production correction, current application mapping and expanded reliability checks, see `PRODUCTION_FIX_REPORT.md` (26 October 2026).
+
 ## Build and code
 
 - Next.js 16.4.3 production static export: passed; all requested routes and five case studies rendered to HTML.

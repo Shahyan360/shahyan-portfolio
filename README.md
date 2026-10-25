@@ -27,13 +27,13 @@ npm start
 
 Edit `src/content/profile.ts`, `experience.ts`, `projects.ts`, `skills.ts`, and `achievements.ts`. The same records feed homepage, gallery, case studies and Quick View. Read `PROJECT_INVENTORY.md` before changing attribution, project status, metrics or demo claims. No resume download is published until a current file is validated.
 
-Main products: **Lizz** (formerly Maxine), **Aster ERP** (formerly Zascare), **Meridian ERP**. Odoo case studies cover Unico and DSL; experience adds Shopify–Odoo, manufacturing, education ERP and e-invoicing stories. Playground contains original workflow studies and the local Embodied AI research entry.
+Main products: **Lizz**, **Aster ERP**, **Meridian ERP**. Odoo case studies cover Unico and DSL; experience adds Shopify–Odoo, manufacturing, education ERP and e-invoicing stories. Playground contains original workflow studies and the local Embodied AI research entry.
 
 ## Embedded live projects
 
-Homepage and product case studies contain real, scrollable iframes with launch, reload, expand and external-opening controls. They load only after visitor activation. The portfolio never proxies application credentials or production data. Meridian's website is public; its workspace requires its own owner account. The browser may impose third-party cookie/session restrictions; opening externally remains available.
+Homepage and product case studies contain real, scrollable iframes with launch, reload, expand, collapse, close and external-opening controls. They load only after visitor activation. A nonce-bound, origin-checked postMessage acknowledgement confirms that meaningful application UI rendered; an iframe load event alone never marks it ready. Unconfirmed loads and offline browsers receive recoverable explanations. The portfolio never proxies credentials or production data. Meridian's website is public; its workspace requires its own owner account.
 
-The hosts' Vercel response-header transforms allow framing by the exact portfolio origin and the local preview only. See `PROJECT_INVENTORY.md` for route IDs and configuration. A new portfolio domain must be added to all three allowlists. Source repositories were not changed by this task because connector writes were denied.
+The application source and Vercel response-header transforms allow framing only by `https://shahyan-khalid-360.vercel.app`, local preview, and each application itself. See `HOSTING.md` for mapping and configuration. A new portfolio domain must be added to the CSP and bridge allowlists. The three application repositories contain the bridge and its focused security tests.
 
 ## Assets
 
@@ -43,6 +43,7 @@ Optimized assets are checked in under `public/images`. Original supplied/reposit
 
 ```powershell
 npm run typecheck
+npm run lint
 npm run build
 npm audit
 npx playwright install chromium firefox
@@ -56,9 +57,11 @@ Tests check all routes, metadata, navigation, four widths (320/390/768/1440), im
 
 `npm run build` exports a portable static website into `out/`. Deploy **the contents of out/** on a static host supporting directory index files and a 404.html fallback. No server-side Next runtime is required. Set `NEXT_PUBLIC_SITE_URL` to the final absolute origin before building to update metadata and sitemap.
 
-The connected Sites project is recorded in `.openai/hosting.json`; preserve its opaque project ID. Sites packaging uses the bundled Sites build/source workflow and deploys the exact pushed commit. New Sites are private by default. Sharing/audience changes are a separate hosting choice.
+Production is `https://shahyan-khalid-360.vercel.app`. Push to `main` in `Shahyan360/shahyan-portfolio`; its connected Vercel project builds and deploys automatically. `.openai/hosting.json` records the original preview service and is not used for the current GitHub-to-Vercel production deployment.
 
 For Vercel or another static host, use build command `npm run build`, output `out`, Node 24, and no SPA catch-all rewrite. Keep existing three-product embed allowlists in sync with the chosen portfolio origin. Security header templates are in `HOSTING.md`.
+
+Run the same browser suite against production by setting the non-secret `BASE_URL` to `https://shahyan-khalid-360.vercel.app` before `npm run test:e2e`. Production tests do not start a local server, send email, invoke live inference, or change private workspace data. Recoverability checks use explicitly intercepted fictional test documents in the browser test context.
 
 ## Documentation
 
@@ -66,3 +69,4 @@ For Vercel or another static host, use build command `npm run build`, output `ou
 - `PROJECT_INVENTORY.md`: repository audit, evidence, contribution boundaries, assets and validation queue.
 - `HOSTING.md`: hosting and exact-origin embed configuration.
 - `VERIFICATION.md`: results and remaining verification limits.
+- `PRODUCTION_FIX_REPORT.md`: production root causes, corrected mapping, releases and reliability verification.

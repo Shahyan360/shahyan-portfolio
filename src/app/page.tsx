@@ -1,4 +1,5 @@
 import Link from '@/components/SiteLink';
+import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import LiveGallery from '@/components/LiveGallery';
 import ProjectCard from '@/components/ProjectCard';
@@ -9,6 +10,7 @@ import { Arrow } from '@/components/Arrow';
 import { projects } from '@/content/projects';
 import { achievements } from '@/content/achievements';
 import { capabilities } from '@/content/skills';
+export const metadata: Metadata = { alternates: { canonical: '/' } };
 export default function Home() {
   const products = ['lizz', 'aster', 'meridian'].map(slug => projects.find(p => p.slug === slug)!);
   const enterprise = projects.filter(p => !p.demo);
