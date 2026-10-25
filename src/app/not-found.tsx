@@ -1,0 +1,2 @@
+import Link from '@/components/SiteLink';
+export default function NotFound() { return <section className="page-heading section-wrap not-found"><span className="eyebrow">404 / A CONNECTION NOT FOUND</span><h1>A little<br /><em>off the map.</em></h1><p>This page isn’t part of the system. Let’s get you back to the work.</p><Link href="/work/" className="button button-primary">Explore the projects ↗</Link></section>; }

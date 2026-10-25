@@ -1,0 +1,31 @@
+{
+  "name": "shahyan-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "node scripts/serve.mjs",
+    "typecheck": "tsc --noEmit",
+    "assets": "node scripts/assets.mjs",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "next": "16.4.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "three": "0.186.1",
+    "@fontsource-variable/manrope": "^5.2.8",
+    "@fontsource/instrument-serif": "^5.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.183.0",
+    "typescript": "^5.9.3",
+    "sharp": "0.35.5",
+    "@playwright/test": "^1.58.0",
+    "@axe-core/playwright": "^4.11.0"
+  }
+}

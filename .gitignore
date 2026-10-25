@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+.env*
+!.env.example
+.sites-runtime/
+test-results/
+test-results-*/
+playwright-report/
+*.tsbuildinfo
+qa/
+.browsers/

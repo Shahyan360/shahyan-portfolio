@@ -1,0 +1,95 @@
+export type Project = {
+  slug: string; name: string; subtitle: string; category: string; domain: string; status: string;
+  description: string; repo: string; demo?: string; image?: string; color: string;
+  role: string; challenge: string; overview: string; architecture: string[];
+  implementation: { title: string; text: string }[]; outcome: string; scope: string;
+  technologies: string[]; evidence: string;
+};
+export const projects: Project[] = [
+  {
+    slug: 'lizz', name: 'Lizz', subtitle: 'A calmer inbox. A clearer next step.', category: 'AI · Full-stack', domain: 'ai', status: 'Live public demo',
+    description: 'An AI email operations workspace that turns conversations into structured details, grounded drafts, and useful next steps.',
+    repo: 'Lizz-demo', demo: 'https://lizz-ai.vercel.app/demo', image: '/images/lizz.webp', color: 'sage',
+    role: 'AI workflow and full-stack development; public demonstration with isolated fictional data, structured inference, and human review.',
+    challenge: 'Business requests arrive as unstructured conversations. Extracting the important details is only half the problem: the proposed response must be explainable, reviewable, and tied to a useful next action.',
+    overview: 'Previously known as Maxine, Lizz brings inbox triage, contextual drafting, tasks, and estimates into a single workspace. Its public release lets visitors explore fictional conversations without connecting a mailbox.',
+    architecture: ['Fictional email', 'Validated sample ID', 'Gemini inference', 'Zod validation', 'Human review', 'Local tasks & drafts'],
+    implementation: [
+      { title: 'Constrain the model boundary', text: 'The public API accepts validated sample IDs. Fixed fictional references provide context, while constrained JSON and Zod schemas validate results before the interface renders them.' },
+      { title: 'Make review an explicit step', text: 'Draft editing, approval, and rejection are visible workflow states. No confidence score or automation rule can send a real email or authorize a financial action.' },
+      { title: 'Budget inference before it runs', text: 'Durable private Blob quota reservations bound shared usage before the provider is called. Timeouts and labeled sample responses keep the demonstration useful when live inference is unavailable.' },
+      { title: 'Separate product architecture from the demo', text: 'The original application contains Prisma/MySQL, Redis/BullMQ, Qdrant, and provider workflows. The public Next.js runtime deliberately isolates those modules and uses per-tab demonstration state.' },
+    ], outcome: 'A deployed, inspectable AI workspace with live Gemini inference and a clear human review boundary. Visitors can distinguish model-generated results from explicitly labeled sample output.',
+    scope: 'The public demo does not send email, connect customer accounts, run live vector retrieval, or provide multi-tenant customer workspaces. Demonstration data is fictional.',
+    technologies: ['Next.js 16', 'React', 'TypeScript', 'Gemini', 'Zod', 'Vercel Blob'], evidence: 'README.md and public-app/package.json',
+  },
+  {
+    slug: 'unico', name: 'Unico', subtitle: 'From order to operation.', category: 'Enterprise · Odoo 19', domain: 'enterprise', status: 'Public addon source',
+    description: 'A connected collection of Odoo 19 addons spanning sales, procurement, fulfillment, returns, payments, and financial reporting.',
+    repo: 'odoo-unico-custom-addons', color: 'copper',
+    role: 'Odoo development and solution consulting within an enterprise implementation. The portfolio export retains original module authorship and license notices; it is not a claim of sole authorship.',
+    challenge: 'Sales, material availability, purchasing, fulfillment, and payment each have their own states. The difficult work is connecting them while preserving clear ownership and predictable transitions.',
+    overview: 'Fourteen custom addons extend standard Odoo workflows. They surface material shortages, link purchase demand to sales, track work in progress, and connect operational work with payment and management reporting.',
+    architecture: ['Sales order', 'Stock availability', 'Purchase urgency', 'Delivery / WIP', 'Payment', 'Reporting'],
+    implementation: [
+      { title: 'Connect demand to procurement', text: 'Sales confirmation triggers replenishment checks. Linked sales and purchase reporting exposes the vendors and orders behind fulfillment, while urgency makes purchasing priorities visible.' },
+      { title: 'Make fulfillment legible', text: 'Delivery planning, material-availability views, Field Service delivery tasks, and a configurable WIP board turn operational stages into explicit records and dashboards.' },
+      { title: 'Carry payment context through the workflow', text: 'Modules cover Net 30 approvals, combined invoice payment links, ACH status, and Stripe Terminal payment collection using the Odoo Stripe provider.' },
+      { title: 'Extend the platform in its own language', text: 'Python ORM models, XML/QWeb views, JavaScript/OWL, and SCSS build on Odoo 19. External proprietary dependencies are deliberately excluded from the published source collection.' },
+    ], outcome: 'A source-verifiable collection of 14 operational addons. It demonstrates concrete implementation across procurement, fulfillment, payment handling, and reporting rather than configuration alone.',
+    scope: 'This is a sanitized source export, not a complete hosted ERP. Some addons require separately obtained dependencies or licensed Odoo Enterprise modules. Syntax and reference checks were recorded; Odoo runtime validation was not run for the export.',
+    technologies: ['Odoo 19', 'Python ORM', 'PostgreSQL', 'XML / QWeb', 'JavaScript / OWL', 'Stripe'], evidence: 'README.md, addon manifests and source',
+  },
+  {
+    slug: 'aster', name: 'Aster ERP', subtitle: 'Clarity, down to the decimal.', category: 'Finance · Frontend', domain: 'products', status: 'Live portfolio sandbox',
+    description: 'A carefully structured Angular finance workspace for payment vouchers, ledger exploration, and a synthetic Trial Balance.',
+    repo: 'aster-erp', demo: 'https://aster-erp.vercel.app', image: '/images/aster.webp', color: 'lavender',
+    role: 'Authorized portfolio adaptation of an existing enterprise frontend. Contributions include a synthetic adapter, finance overview, Trial Balance views, session reliability, decimal helpers, route splitting, tests, and accessibility improvements.',
+    challenge: 'Financial interfaces need more than polished tables. They must preserve precision, explain posting states, avoid stale requests, and keep totals consistent across views.',
+    overview: 'Formerly Zascare, Aster ERP presents an isolated portfolio sandbox built with Angular 21. Payment vouchers, the General Ledger, and Trial Balance all operate on fictional data within the browser tab.',
+    architecture: ['Angular interface', 'NgRx / Signals', 'Synthetic adapter', 'Shared journal', 'Ledger', 'Trial Balance'],
+    implementation: [
+      { title: 'Keep the financial state coherent', text: 'Overview figures and Trial Balance derive from the synthetic journal. Drafts do not change the journal; reversals retain the original record and append counter-entries.' },
+      { title: 'Handle precision deliberately', text: 'Decimal helpers support amount and tax previews. The case study preserves documented calculation conventions instead of presenting demo behavior as a universal accounting rule.' },
+      { title: 'Build for real navigation', text: 'Standalone Angular components and feature routes load on demand. NgRx, Signals, and RxJS coordinate state and cancel stale ledger requests when filters change.' },
+      { title: 'Make contribution boundaries visible', text: 'The original finance components and API contracts remain adapted. The upstream PrimeNG/Sakai template notice and existing copyright attribution are retained.' },
+    ], outcome: 'A deployed finance sandbox where visitors can edit simulated vouchers, inspect ledger movement, reverse posted fixtures, and reconcile a Trial Balance without a backend account.',
+    scope: 'No production banking connection, database, accounting backend, or real approval action is connected. Local state is not durable or multi-user. This is a collaborative frontend adaptation.',
+    technologies: ['Angular 21', 'TypeScript', 'NgRx', 'RxJS', 'PrimeNG', 'decimal.js'], evidence: 'README.md, package.json, financial workflow documentation',
+  },
+  {
+    slug: 'meridian', name: 'Meridian ERP', subtitle: 'One connected business workspace.', category: 'ERP · Full-stack', domain: 'products', status: 'Hosted application',
+    description: 'A full-stack workspace connecting sales, inventory, purchasing, people, school operations, accounting, and an AI assistant.',
+    repo: 'meridian-erp', demo: 'https://meridian-erp-khalidshahyan0-1999s-projects.vercel.app', image: '/images/meridian.webp', color: 'blue',
+    role: 'Full-stack product engineering across the React workspace, Express API, relational models, operational flows, accounting, and a permission-aware assistant.',
+    challenge: 'Business modules share data, but they cannot all mutate it independently. Posting an order needs to keep stock, payments, and double-entry journals consistent, including cancellation and reversal.',
+    overview: 'Meridian connects operational modules through one Express application and a shared Prisma data model. The local fictional demo uses SQLite; the hosted application uses PostgreSQL and private owner authentication.',
+    architecture: ['React / Vite', 'Express API', 'Session & roles', 'Domain operations', 'Prisma', 'PostgreSQL'],
+    implementation: [
+      { title: 'Model posting as a business event', text: 'Draft orders have no stock or journal effect. Posting, partial payments, and cancellation use server-validated transitions, with historical movement and journal entries preserved.' },
+      { title: 'Keep authorization on the server', text: 'Revocable database sessions use HttpOnly cookies. Admin, manager, and employee permissions are enforced by API routes; browser guards provide navigation feedback rather than security.' },
+      { title: 'Make AI actions reviewable', text: 'The Gemini assistant reads through permitted tools. Write proposals require a separate confirmation, are identity-bound, expire, and recheck permissions before execution.' },
+      { title: 'Support a complete operating flow', text: 'The workspace includes products, customers, suppliers, inventory, orders, HR, school records, and financial reports. Monetary calculations use rounded integer minor units.' },
+    ], outcome: 'A complete, inspectable full-stack application with connected operational flows, role access, financial reports, and a deployed private workspace.',
+    scope: 'The hosted workspace requires an owner account; public demo credentials apply only to local installations. Statutory tax filing and payment-provider integration are outside its scope.',
+    technologies: ['React / Vite', 'Express', 'Prisma', 'PostgreSQL', 'SQLite demo', 'Gemini'], evidence: 'README.md, workspace manifests and server architecture',
+  },
+  {
+    slug: 'dsl', name: 'DSL Group', subtitle: 'Better signals. Better operations.', category: 'Enterprise · Odoo 19', domain: 'integrations', status: 'Public addon source',
+    description: 'Odoo extensions for CRM qualification, duplicate review, activity priorities, geographic summaries, and return authorizations.',
+    repo: '-odoo-dsl-custom-addons', color: 'sand',
+    role: 'Odoo development and consulting on enterprise CRM and operations. Published modules preserve their original author and license declarations; the export does not claim sole authorship.',
+    challenge: 'Business systems accumulate ambiguity: duplicate contacts, inconsistent lead qualification, scattered activities, and returns without clear documentation. Teams need reliable signals in the workflows they already use.',
+    overview: 'Five Odoo 19 addons improve everyday CRM and operational work while retaining standard Odoo applications as the foundation. The source export removes company records and proprietary connectors.',
+    architecture: ['CRM records', 'Qualification', 'Duplicate review', 'Activity priority', 'Map summaries', 'Return authorization'],
+    implementation: [
+      { title: 'Improve data before it spreads', text: 'Duplicate warnings identify contacts and products that resemble existing records. Review tools connect duplicates with relevant sales and purchasing activity.' },
+      { title: 'Bring context into the interface', text: 'Qualification fields, lead conversion behavior, and approval controls extend CRM. Chatter activities group into Overdue, Urgent, and Planned states.' },
+      { title: 'Connect operations to place', text: 'Map summaries expose sales, purchasing, and expected-revenue totals alongside geographic records. The exported territory mapping deliberately contains no company dataset.' },
+      { title: 'Make returns traceable', text: 'Return authorization records, return reasons, and printable letters use installed company details rather than hard-coded employer contact information.' },
+    ], outcome: 'Five source-verifiable addons focused on CRM quality and operational clarity, supported by documented Python/XML syntax and manifest reference checks.',
+    scope: 'The export contains no customer database, production configuration, or proprietary connector code. Licensed Enterprise dependencies are required for map features. Odoo runtime tests were not run for this export.',
+    technologies: ['Odoo 19', 'Python ORM', 'XML / QWeb', 'JavaScript / OWL', 'CRM', 'Data quality'], evidence: 'README.md, addon manifests and source',
+  },
+];
+export const githubUrl = (project: Project) => `https://github.com/Shahyan360/${project.repo}`;
