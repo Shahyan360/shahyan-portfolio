@@ -46,6 +46,22 @@ Before publication: strict typecheck, ESLint, production static export, dependen
 
 Public production verification is recorded after the Git-triggered portfolio deployment; see the completion update in this report and ignored `qa/production-results.json` when available. The test suite can target production through `BASE_URL` without starting a local server. Failure/restricted-state fixtures are intercepted fictional documents in the test context, while the real embed checks use the actual hosted applications.
 
+### Public production verification completed
+
+The functional release `1498d3f1dc8fe13f3826190c15acc7aa9ed6919d` deployed automatically from Git to `dpl_7MV2QBkJWdg3UattJ9J35V9zFK5b`, reached READY, and served the canonical public domain with the intended CSP and current copy.
+
+- Chromium: **39/39 production checks passed**, no skipped, unexpected or flaky checks.
+- Firefox: **39/39 production checks passed**, no skipped, unexpected or flaky checks.
+- Application bridges: **21/21 focused checks passed** (seven per application).
+- Typecheck, ESLint, production build and npm dependency audit passed; the audit reported zero vulnerabilities.
+- Real desktop/mobile Lizz, Aster and Meridian frames acknowledged rendered UI. Expand/collapse, Escape from the child, reload and close/unload were verified against those hosts. Parent scrolling, lazy retained views and neutral loading failures were also covered.
+- Recovery and restricted-state fixtures were tested in isolated browser contexts on the deployed portfolio. These fixtures do not alter a hosted application's production behavior.
+- Automated WCAG A/AA scans passed on the seven checked portfolio routes. No obsolete branding remained in public page copy or metadata; canonical/social/sitemap origins used the public domain.
+- Manual in-app-browser verification opened Lizz's Inbox and Aster's demo financial-year flow and finance dashboard inside the public portfolio. Those checks recorded no browser console errors. Screenshots are saved locally in ignored qa/.
+- An anonymous request to Meridian's session endpoint returned no user. No owner account, private session or customer workspace was exposed.
+
+The final follow-up commit updates this verification record only. It does not alter the tested application behavior. No remaining manual configuration is required for the public viewers; Meridian's authenticated workspace continues to require its own owner account by design.
+
 The first portfolio release attempt hit Vercel's `NEXT_NO_ROUTES_MANIFEST` because an explicit `out` override conflicts with its Next.js framework builder. That override was removed; static export remains enabled, and the framework integration selects its build output automatically. The failed attempt was not promoted over the existing public site.
 
 ## Remaining access boundaries
