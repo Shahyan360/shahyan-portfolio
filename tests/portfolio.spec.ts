@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-const routes = ['/', '/work/', '/about/', '/experience/', '/playground/', '/contact/', '/work/lizz/', '/work/aster/', '/work/meridian/', '/work/unico/', '/work/dsl/'];
+const routes = ['/', '/work/', '/about/', '/experience/', '/playground/', '/contact/', '/work/lizz/', '/work/aster/', '/work/meridian/', '/work/unico/', '/work/dsl/', '/work/alam-cotton-mills/', '/work/uae-e-invoicing/', '/work/mxt-manufacturing/', '/work/laps-education/', '/work/procurement-auditor/'];
 
 test('all routes load directly with metadata, content and no browser errors', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
@@ -16,14 +16,14 @@ for (const width of [320, 390, 768, 1440]) {
 }
 
 test('project filters return the intended curated collection', async ({ page }) => {
-  await page.goto('/work/'); await expect(page.locator('.project-card')).toHaveCount(5);
+  await page.goto('/work/'); await expect(page.locator('.project-card')).toHaveCount(10);
   await page.getByRole('button', { name: 'Live products' }).click(); await expect(page.locator('.project-card')).toHaveCount(3);
-  await page.getByRole('button', { name: 'Enterprise', exact: false }).click(); await expect(page.locator('.project-card')).toHaveCount(2);
-  await page.getByRole('button', { name: /^AI/ }).click(); await expect(page.locator('.project-card')).toHaveCount(1); await expect(page.locator('.project-card h3')).toHaveText('Lizz');
+  await page.getByRole('button', { name: 'Enterprise', exact: false }).click(); await expect(page.locator('.project-card')).toHaveCount(7);
+  await page.getByRole('button', { name: /^AI/ }).click(); await expect(page.locator('.project-card')).toHaveCount(2); await expect(page.locator('.project-card h3')).toHaveText(['Lizz', 'Procurement Auditor']);
 });
 
 test('atlas switches domains and retains conventional case-study links', async ({ page }) => {
-  await page.goto('/'); await page.getByRole('button', { name: '02 Applied intelligence' }).click(); await expect(page.locator('.atlas-info h3')).toHaveText('Applied intelligence'); await expect(page.locator('.atlas-related a')).toHaveAttribute('href', '/work/lizz/');
+  await page.goto('/'); await page.getByRole('button', { name: '02 Applied intelligence' }).click(); await expect(page.locator('.atlas-info h3')).toHaveText('Applied intelligence'); await expect(page.locator('.atlas-related').getByRole('link', { name: 'Lizz', exact: true })).toHaveAttribute('href', '/work/lizz/');
   await page.getByRole('button', { name: 'Explore in 3D' }).click(); await expect(page.locator('.spatial-atlas canvas')).toBeVisible();
 });
 
@@ -65,7 +65,7 @@ test('native navigation reaches case studies and returns without prefetch failur
   const failures: string[] = []; page.on('response', response => { if (response.status() >= 400 && response.url().startsWith(baseURL!)) failures.push(response.url()); });
   await page.goto('/'); await page.getByRole('link', { name: 'Explore my work', exact: true }).click(); await expect(page).toHaveURL(/\/work\/$/);
   await page.getByRole('link', { name: 'Explore project: Lizz case study', exact: true }).click(); await expect(page.locator('h1')).toHaveText('Lizz.');
-  await page.getByRole('link', { name: 'All work', exact: false }).click(); await expect(page.locator('.project-card')).toHaveCount(5); expect(failures).toEqual([]);
+  await page.getByRole('link', { name: 'All work', exact: false }).click(); await expect(page.locator('.project-card')).toHaveCount(10); expect(failures).toEqual([]);
 });
 
 for (const route of ['/', '/about/', '/work/', '/contact/', '/playground/', '/work/lizz/', '/experience/']) {
@@ -81,6 +81,7 @@ for (const build of [{ slug: 'lizz', name: 'Lizz', expected: /A little room to b
     const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
     await viewer.getByRole('button', { name: /Launch interactive/ }).click(); const frame = page.frameLocator('iframe'); await expect(frame.locator('body')).toContainText(build.expected, { timeout: 25000 });
     await expect(viewer).toHaveAttribute('data-state', 'ready', { timeout: 20000 });
+    await viewer.scrollIntoViewIfNeeded();
     if (build.slug === 'lizz') { await frame.getByRole('button', { name: 'Inbox 7', exact: true }).click(); await expect(frame.getByRole('heading', { name: 'Your inbox, in focus.' })).toBeVisible(); }
     await viewer.getByRole('button', { name: 'Expand' }).click(); await expect(viewer).toHaveClass(/expanded/);
     await frame.locator('body').press('Escape'); await expect(viewer).not.toHaveClass(/expanded/);

@@ -1,9 +1,15 @@
+import { odooProjects } from './odooProjects';
+
 export type Project = {
   slug: string; name: string; subtitle: string; category: string; domain: string; status: string;
-  description: string; repo: string; demo?: string; image?: string; color: string;
+  description: string; repo?: string; demo?: string; image?: string; color: string;
+  odoo?: boolean; visualLabel?: string;
   role: string; challenge: string; overview: string; architecture: string[];
   implementation: { title: string; text: string }[]; outcome: string; scope: string;
   technologies: string[]; evidence: string;
+  coverage?: { title: string; text: string }[];
+  validation?: { title: string; text: string }[];
+  deliveryNote?: string;
 };
 export const projects: Project[] = [
   {
@@ -23,24 +29,7 @@ export const projects: Project[] = [
     scope: 'The public demo does not send email, connect customer accounts, run live vector retrieval, or provide multi-tenant customer workspaces. Demonstration data is fictional.',
     technologies: ['Next.js 16', 'React', 'TypeScript', 'Gemini', 'Zod', 'Vercel Blob'], evidence: 'README.md and public-app/package.json',
   },
-  {
-    slug: 'unico', name: 'Unico', subtitle: 'From order to operation.', category: 'Enterprise · Odoo 19', domain: 'enterprise', status: 'Public addon source',
-    description: 'A connected collection of Odoo 19 addons spanning sales, procurement, fulfillment, returns, payments, and financial reporting.',
-    repo: 'odoo-unico-custom-addons', color: 'copper',
-    role: 'Odoo development and solution consulting within an enterprise implementation. The portfolio export retains original module authorship and license notices; it is not a claim of sole authorship.',
-    challenge: 'Sales, material availability, purchasing, fulfillment, and payment each have their own states. The difficult work is connecting them while preserving clear ownership and predictable transitions.',
-    overview: 'The Unico Supply implementation connects Odoo 19 sales, purchasing, inventory, manufacturing, and accounting. Stock reservation, replenishment, and procurement link customer demand to fulfillment. The published collection contains fourteen custom addons for material shortages, work in progress, delivery, payments, and management reporting.',
-    architecture: ['Sales order', 'Stock availability', 'Purchase urgency', 'Delivery / WIP', 'Payment', 'Reporting'],
-    implementation: [
-      { title: 'Connect demand to procurement', text: 'Sales confirmation triggers replenishment checks. Linked sales and purchase reporting exposes the vendors and orders behind fulfillment, while urgency makes purchasing priorities visible.' },
-      { title: 'Make fulfillment legible', text: 'Delivery planning, material-availability views, Field Service delivery tasks, and a configurable WIP board turn operational stages into explicit records and dashboards.' },
-      { title: 'Carry payment context through the workflow', text: 'Modules cover Net 30 approvals, combined invoice payment links, ACH status, and Stripe Terminal payment collection using the Odoo Stripe provider.' },
-      { title: 'Extend the platform in its own language', text: 'Python ORM models, XML/QWeb views, JavaScript/OWL, and SCSS build on Odoo 19. External proprietary dependencies are deliberately excluded from the published source collection.' },
-      { title: 'Connect operational and financial platforms', text: 'The wider implementation includes QuickBooks integration work involving OAuth, account/customer/vendor mappings, sandbox transaction testing, retry handling, and reconciliation. That delivery context is distinct from the public addon export, which does not expose client integration configuration or establish every financial edge case as resolved.' },
-    ], outcome: 'A source-verifiable collection of 14 operational addons. It demonstrates concrete implementation across procurement, fulfillment, payment handling, and reporting rather than configuration alone.',
-    scope: 'This is a sanitized source export, not a complete hosted ERP. Some addons require separately obtained dependencies or licensed Odoo Enterprise modules. Syntax and reference checks were recorded; Odoo runtime validation was not run for the export.',
-    technologies: ['Odoo 19', 'Python ORM', 'PostgreSQL', 'XML / QWeb', 'JavaScript / OWL', 'Stripe'], evidence: 'README.md, addon manifests and source',
-  },
+  odooProjects[0],
   {
     slug: 'aster', name: 'Aster ERP', subtitle: 'Clarity, down to the decimal.', category: 'Finance · Frontend', domain: 'products', status: 'Live portfolio sandbox',
     description: 'An Angular finance workspace for reviewing payment vouchers, exploring General Ledger movements, and reconciling a synthetic Trial Balance.',
@@ -75,23 +64,6 @@ export const projects: Project[] = [
     scope: 'The hosted workspace requires an owner account; public demo credentials apply only to local installations. Statutory tax filing and payment-provider integration are outside its scope.',
     technologies: ['React / Vite', 'Express', 'Prisma', 'PostgreSQL', 'SQLite demo', 'Gemini'], evidence: 'README.md, workspace manifests and server architecture',
   },
-  {
-    slug: 'dsl', name: 'DSL Group', subtitle: 'Better signals. Better operations.', category: 'Enterprise · Odoo 19', domain: 'integrations', status: 'Public addon source',
-    description: 'Odoo extensions for CRM qualification, duplicate review, activity priorities, geographic summaries, and return authorizations.',
-    repo: '-odoo-dsl-custom-addons', color: 'sand',
-    role: 'Odoo development and consulting on enterprise CRM and operations. Published modules preserve their original author and license declarations; the export does not claim sole authorship.',
-    challenge: 'Business systems accumulate ambiguity: duplicate contacts, inconsistent lead qualification, scattered activities, and returns without clear documentation. Teams need reliable signals in the workflows they already use.',
-    overview: 'The wider DSL Group implementation covers five US companies in a shared Odoo 19 environment, with company-specific access, warehouse/location configuration, master-data migration, inventory, sales, purchasing, CRM, and accounting workflows. The public source collection contains five focused addons for CRM qualification, duplicate review, activities, map summaries, and returns; it is not the full client environment.',
-    architecture: ['CRM records', 'Qualification', 'Duplicate review', 'Activity priority', 'Map summaries', 'Return authorization'],
-    implementation: [
-      { title: 'Improve data before it spreads', text: 'Duplicate warnings identify contacts and products that resemble existing records. Review tools connect duplicates with relevant sales and purchasing activity.' },
-      { title: 'Bring context into the interface', text: 'Qualification fields, lead conversion behavior, and approval controls extend CRM. Chatter activities group into Overdue, Urgent, and Planned states.' },
-      { title: 'Connect operations to place', text: 'Map summaries expose sales, purchasing, and expected-revenue totals alongside geographic records. The exported territory mapping deliberately contains no company dataset.' },
-      { title: 'Make returns traceable', text: 'Return authorization records, return reasons, and printable letters use installed company details rather than hard-coded employer contact information.' },
-      { title: 'Respect company boundaries', text: 'Multi-company delivery requires deliberate ownership for records, shared versus company-specific master data, correct warehouse/location mappings, and access validation. These implementation responsibilities are described at workflow level without exposing customer records or private production architecture.' },
-    ], outcome: 'Five source-verifiable addons focused on CRM quality and operational clarity, supported by documented Python/XML syntax and manifest reference checks.',
-    scope: 'The export contains no customer database, production configuration, or proprietary connector code. Licensed Enterprise dependencies are required for map features. Odoo runtime tests were not run for this export.',
-    technologies: ['Odoo 19', 'Python ORM', 'XML / QWeb', 'JavaScript / OWL', 'CRM', 'Data quality'], evidence: 'README.md, addon manifests and source',
-  },
+  ...odooProjects.slice(1),
 ];
-export const githubUrl = (project: Project) => `https://github.com/Shahyan360/${project.repo}`;
+export const githubUrl = (project: Project) => project.repo ? `https://github.com/Shahyan360/${project.repo}` : undefined;

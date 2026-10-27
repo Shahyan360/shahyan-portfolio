@@ -21,13 +21,13 @@ npm start
 
 ## Routes
 
-`/`, `/work/`, `/work/lizz/`, `/work/aster/`, `/work/meridian/`, `/work/unico/`, `/work/dsl/`, `/experience/`, `/about/`, `/playground/`, `/contact/`, and a real 404. Every route is exported to its own HTML directory for direct loads/refreshes. Sitemap, robots, social image and Person structured data are included.
+`/`, `/work/`, `/work/lizz/`, `/work/aster/`, `/work/meridian/`, `/work/unico/`, `/work/dsl/`, `/work/alam-cotton-mills/`, `/work/uae-e-invoicing/`, `/work/mxt-manufacturing/`, `/work/laps-education/`, `/work/procurement-auditor/`, `/experience/`, `/about/`, `/playground/`, `/contact/`, and a real 404. Every route is exported to its own HTML directory for direct loads/refreshes. Sitemap, robots, social image and Person structured data are included.
 
 ## Content
 
-Edit `src/content/profile.ts`, `experience.ts`, `projects.ts`, `skills.ts`, and `achievements.ts`. The same records feed homepage, gallery, case studies and Quick View. Read `PROJECT_INVENTORY.md` before changing attribution, project status, metrics or demo claims. No resume download is published until a current file is validated.
+Edit `src/content/profile.ts`, `experience.ts`, `projects.ts`, `odooProjects.ts`, `skills.ts`, and `achievements.ts`. The same records feed homepage, gallery, case studies and Quick View. Read `PROJECT_INVENTORY.md` before changing attribution, project status, metrics or demo claims. No resume download is published until a current file is validated.
 
-Main products: **Lizz**, **Aster ERP**, **Meridian ERP**. Odoo case studies cover Unico and DSL; experience adds Shopify–Odoo, manufacturing, education ERP and e-invoicing stories. Playground contains original workflow studies and the local Embodied AI research entry.
+Main products: **Lizz**, **Aster ERP**, **Meridian ERP**. Seven dedicated Odoo case studies cover Unico, DSL Group, Alam Cotton Mills, UAE e-invoicing, MXT manufacturing, LAPS education ERP, and a clearly labeled procurement-auditing prototype. Unico includes the supplied recent QuickBooks configuration, shared status handler, local validation results, clean handoff, and remaining staging/live-acceptance requirements. Playground contains original workflow studies and the local Embodied AI research entry.
 
 ## Embedded live projects
 
