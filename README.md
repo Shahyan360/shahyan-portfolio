@@ -25,9 +25,11 @@ npm start
 
 ## Content
 
-Edit `src/content/profile.ts`, `experience.ts`, `projects.ts`, `odooProjects.ts`, `skills.ts`, and `achievements.ts`. The same records feed homepage, gallery, case studies and Quick View. Read `PROJECT_INVENTORY.md` before changing attribution, project status, metrics or demo claims. No resume download is published until a current file is validated.
+Edit `src/content/profile.ts`, `experience.ts`, `projects.ts`, `odooProjects.ts`, `automationProjects.ts`, `skills.ts`, and `achievements.ts`. The same records feed homepage, gallery, case studies and Quick View. Read `PROJECT_INVENTORY.md` before changing attribution, project status, metrics or demo claims. No resume download is published until a current file is validated.
 
 Main products: **Lizz**, **Aster ERP**, **Meridian ERP**. Seven dedicated Odoo case studies cover Unico, DSL Group, Alam Cotton Mills, UAE e-invoicing, MXT manufacturing, LAPS education ERP, and a clearly labeled procurement-auditing prototype. Unico includes the supplied recent QuickBooks configuration, shared status handler, local validation results, clean handoff, and remaining staging/live-acceptance requirements. Playground contains original workflow studies and the local Embodied AI research entry.
+
+Four additional automation case studies cover order/inventory synchronization, AI lead enrichment/CRM scoring, Gmail/Outlook classification, and multi-agent market research. Their implementation is confirmed by the user; technical scope comes from the supplied implementation plans. Dedicated routes are `/work/ecommerce-order-inventory-sync/`, `/work/ai-lead-enrichment-crm-scoring/`, `/work/gmail-outlook-email-classification/`, and `/work/multi-agent-market-research/`. The portfolio now contains 14 project case studies and 20 content routes. Homepage links, an Automation filter, related studies, and Systems Atlas connections make these discoverable. No public workflow endpoint, source repository, or executed acceptance result is invented.
 
 ## Embedded live projects
 

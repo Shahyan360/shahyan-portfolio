@@ -1,15 +1,17 @@
 import { odooProjects } from './odooProjects';
+import { automationProjects } from './automationProjects';
 
 export type Project = {
   slug: string; name: string; subtitle: string; category: string; domain: string; status: string;
   description: string; repo?: string; demo?: string; image?: string; color: string;
-  odoo?: boolean; visualLabel?: string;
+  odoo?: boolean; automation?: boolean; visualLabel?: string;
   role: string; challenge: string; overview: string; architecture: string[];
   implementation: { title: string; text: string }[]; outcome: string; scope: string;
   technologies: string[]; evidence: string;
   coverage?: { title: string; text: string }[];
   validation?: { title: string; text: string }[];
   deliveryNote?: string;
+  acceptance?: { title: string; text: string }[];
 };
 export const projects: Project[] = [
   {
@@ -65,5 +67,6 @@ export const projects: Project[] = [
     technologies: ['React / Vite', 'Express', 'Prisma', 'PostgreSQL', 'SQLite demo', 'Gemini'], evidence: 'README.md, workspace manifests and server architecture',
   },
   ...odooProjects.slice(1),
+  ...automationProjects,
 ];
 export const githubUrl = (project: Project) => project.repo ? `https://github.com/Shahyan360/${project.repo}` : undefined;

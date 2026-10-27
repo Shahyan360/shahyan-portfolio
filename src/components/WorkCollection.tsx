@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import { projects } from '@/content/projects';
 import ProjectCard from './ProjectCard';
-const filters = ['All work', 'Live products', 'Enterprise', 'AI'];
-const matchesFilter = (p: (typeof projects)[number], filter: string) => filter === 'All work' || (filter === 'Live products' && !!p.demo) || (filter === 'Enterprise' && !!p.odoo) || (filter === 'AI' && p.domain === 'ai');
+const filters = ['All work', 'Live products', 'Enterprise', 'AI', 'Automation'];
+const matchesFilter = (p: (typeof projects)[number], filter: string) => filter === 'All work' || (filter === 'Live products' && !!p.demo) || (filter === 'Enterprise' && !!p.odoo) || (filter === 'AI' && p.domain === 'ai') || (filter === 'Automation' && !!p.automation);
 export default function WorkCollection() {
   const [filter, setFilter] = useState('All work');
   const selected = projects.filter(p => matchesFilter(p, filter));

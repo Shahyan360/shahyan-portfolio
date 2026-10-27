@@ -57,3 +57,16 @@ The latest request explicitly asks for all supplied Odoo project details. `src/c
 Unico's recent supplied update covers connector 19.0.1.2.11 → 19.0.1.6.3, company/environment bindings, PO configuration, AP references, release rights, vendor/product mapping, existing MTO configuration, Windows queue investigation, shared qbo_status_sync.py handling, retries, stale attempts, connection identity, Pending Verification, committed PO/receipt outcomes, cancellations, and clean delivery. Reported local results are 252 compatibility tests, 22 failure scenarios plus five lifecycle checks, and a broader 560-test run with 546 passing and 14 baseline failures/errors. The four-file change and 231-file package are reported handoff facts, not artifacts independently rerun or inspected during this portfolio update.
 
 These connector results do not retroactively validate the public addon export. Production-equivalent staging, compatible queue dependencies, module upgrade/restart, and representative live QBO Sandbox acceptance remain required. The portfolio does not claim a completed production rollout, confirmed live PO export, newly authored financial connector, or publication of the private connector package.
+
+## Automation expansion — 28 October 2026
+
+The user confirmed building four independent projects from the supplied n8n implementation plans. They are presented as automation implementations, not relabeled as unfinished concepts. Their technical descriptions distinguish the documented architecture, optional scaling paths, example policies, and acceptance requirements from independently verified runtime behavior.
+
+| Case study | Supplied implementation scope | Public evidence boundary |
+| --- | --- | --- |
+| Order & Inventory Sync | Shopify/WooCommerce ingestion, event/order identity, authoritative reservation, Shippo rates, reorder recommendations, Slack alerts, reconciliation | No public stores, endpoint, workflow export, passing acceptance report, or throughput figure supplied |
+| AI Lead Enrichment | HubSpot/Typeform, enrichment provenance, GPT-4o assessment, deterministic scoring, CRM updates, routing and history | Provider alternatives remain alternatives; scoring weights are policy, not measured predictive accuracy |
+| Gmail & Outlook Classification | Provider triggers/content retrieval, structured classification, labels/categories, confidence/review, feedback and audits | Independent from Lizz; no private mailbox data, public connection, accuracy result, or destructive mailbox demo |
+| Multi-Agent Market Research | Six specialist roles, bounded collection, evidence IDs, review, JSON/HTML/Gotenberg PDF, Drive delivery and notifications | No actual report, deployed agent URL, performance benchmark, or guaranteed factual accuracy supplied |
+
+Shared foundation: self-hosted n8n, Node.js, Docker, PostgreSQL, JavaScript/TypeScript, protected credentials, recoverable state, and optional Redis/worker scaling. No attribution to an employer or client was added because the supplied plans do not establish one. The previously listed 19 omitted academic/other projects remain omitted; this request authorizes these four additions only.
