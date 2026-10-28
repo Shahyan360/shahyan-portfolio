@@ -1,3 +1,4 @@
+import { commerceProject } from './commerceProject';
 import type { Project } from './projects';
 
 const evidence = 'Implementation confirmed by Shahyan; technical scope drawn from the supplied four-project implementation plans. Workflow exports, source repositories, live environments, and executed acceptance results were not supplied for independent verification.';
@@ -8,40 +9,7 @@ const foundation = [
 ];
 
 export const automationProjects: Project[] = [
-  {
-    slug: 'ecommerce-order-inventory-sync', name: 'Order & Inventory Sync',
-    subtitle: 'One order. A dependable fulfillment path.',
-    category: 'Commerce · n8n automation', domain: 'integrations', automation: true,
-    status: 'Automation implementation', visualLabel: 'SYNC', color: 'sage',
-    description: 'Shopify and WooCommerce order ingestion, multi-warehouse inventory allocation, Shippo rate comparison, and traceable replenishment alerts.',
-    role: 'Automation and integration engineering across store ingestion, shared fulfillment workflows, JavaScript normalization, PostgreSQL state, inventory reservation, shipping quotes, and operational alerts.',
-    challenge: 'Orders can arrive twice, change payment state, or compete for the same last item. A reliable fulfillment workflow must distinguish a received event, a committed stock allocation, a shipping quote, and an actual shipment.',
-    overview: 'Built an n8n-based order and inventory synchronization project following the Automated Multi-Store Order Fulfillment & Inventory Monitoring System implementation plan. Shopify and WooCommerce events feed one normalized processing flow, connecting stock availability, warehouse allocation, shipping-rate retrieval, shortage handling, and low-stock recommendations. PostgreSQL records business state independently of workflow execution history.',
-    architecture: ['Store events', 'Validate & deduplicate', 'Inventory allocation', 'Shippo rates', 'Order state & alerts', 'Reconciliation'],
-    coverage: [
-      { title: 'Multi-store order processing', text: 'Separate Shopify and WooCommerce ingestion workflows normalize order IDs, store identity, currency, payment status, customer/destination fields, and SKU lines before calling a shared sub-workflow. Payment and cancellation updates remain distinct events for the same order.' },
-      { title: 'Inventory, shipping, and replenishment', text: 'Configured warehouse priorities and split-shipment rules govern allocation. Shipping recommendations consider eligible carriers, currency, service constraints, parcel dimensions/weight, and delivery requirements. Shortages and reorder-point breaches create reviewable recommendations rather than silently purchasing stock.' },
-      ...foundation,
-    ],
-    implementation: [
-      { title: 'Authenticate and acknowledge incoming events', text: 'Store triggers or a verified webhook ingress feed asynchronous processing. The plan specifies Shopify HMAC and WooCommerce signature checks against the correct payload, prompt acknowledgement, and persisted event identifiers before longer work begins.' },
-      { title: 'Normalize once and deduplicate at the database', text: 'JavaScript validates positive integer quantities and required SKUs. Composite platform/store identifiers prevent unrelated orders sharing a number from colliding. integration_events deduplicates deliveries separately from orders so a legitimate later payment or cancellation is not discarded.' },
-      { title: 'Reserve against authoritative stock', text: 'Availability accounts for on-hand, reserved, and safety-stock quantities. Allocation rechecks availability within a row-locked transaction or transactional inventory service before committing reservations. A synchronized snapshot supports discovery; an authoritative reservation prevents separate read/write steps from overselling.' },
-      { title: 'Model incomplete fulfillment honestly', text: 'Order states separate Received, Validated, Stock Reserved, Shipping Quoted, and Ready for Fulfillment. Awaiting Payment, Partially Allocated, Backordered, Cancelled, and Error branches retain exceptions. Cancellation releases applicable reservations according to their actual execution state.' },
-      { title: 'Compare shipping rates without buying labels', text: 'An HTTP Request node sends sender/destination and parcel data to Shippo, then persists eligible carrier/service/rate/currency results. Missing parcel data or unavailable rates routes to review. A returned quote is neither label purchase nor proof that an order shipped.' },
-      { title: 'Make replenishment actionable', text: 'Projected availability includes confirmed incoming stock. Reorder-point and target-stock rules consider existing purchase orders, vendor minimums, pack multiples, and lead times. PostgreSQL reorder_alerts and saved notification references suppress repeated Slack Block Kit alerts while an issue is unresolved.' },
-      { title: 'Reconcile the workflow with the business', text: 'Scheduled comparisons check store orders, database order records, authoritative balances, outstanding reservations, and active alerts. State changes update appropriate store notes or metadata; fulfillment is updated only after a genuine shipment event.' },
-      { title: 'Keep an inspectable record of each transition', text: 'The data model separates orders, order_items, inventory_balances, inventory_reservations, reorder_rules, shipping_quotes, reorder_alerts, integration_events, and workflow_audit. Execution references, results, and errors support replay and investigation.' },
-    ],
-    acceptance: [
-      { title: 'Order identity and concurrent allocation', text: 'Acceptance scenarios cover paid Shopify/WooCommerce orders, duplicate delivery without duplicate reservations, two simultaneous orders for the last item, insufficient inventory, partial allocation, and safe cancellation release.' },
-      { title: 'Shipping and alert failures', text: 'Missing parcel weight must stop rate requests for correction. Shippo timeouts lead to bounded retry or shipping review. Low stock should create one actionable alert, and reconciliation should record mismatches for review.' },
-    ],
-    outcome: 'A connected fulfillment workflow in which store events, inventory commitments, shipping recommendations, and replenishment exceptions remain distinct and traceable.',
-    scope: 'Implementation described by Shahyan and documented through the supplied plan. No public workflow endpoint, store account, client inventory, repository, or measured throughput is published. Queue-mode scaling is documented architecture rather than evidence of a deployed worker fleet. Acceptance scenarios below are coverage requirements, not claimed passing results.',
-    technologies: ['n8n', 'Node.js', 'JavaScript / TypeScript', 'Docker Compose', 'PostgreSQL', 'Redis queue architecture', 'Shopify', 'WooCommerce', 'Shippo', 'Slack Block Kit'],
-    evidence,
-  },
+  commerceProject,
   {
     slug: 'ai-lead-enrichment-crm-scoring', name: 'AI Lead Enrichment',
     subtitle: 'Better context. A clearer sales priority.',

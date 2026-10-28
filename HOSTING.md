@@ -49,3 +49,7 @@ Focused bridge checks can be run with node --test scripts/test-portfolio-embed.m
 ## Original preview service
 
 .openai/hosting.json is retained as historical project configuration. It does not control the current GitHub-to-Vercel production deployment.
+
+## Commerce Sync public simulator
+
+Repository: https://github.com/Shahyan360/n8n-ecommerce-inventory-sync (main, root). Public deployment: https://n8n-ecommerce-inventory-sync.vercel.app. The static build uses node web/build.mjs and outputs web/dist. Commit 9119339 adds the portfolio bridge and exact frame-ancestor allowlist. The bridge waits for initialized simulator data before acknowledging visible UI; it transmits only protocol state and Escape, never business records. Portfolio frame-src includes this fourth application origin. The browser demo is separate from the PostgreSQL/n8n operational stack.

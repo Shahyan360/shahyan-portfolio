@@ -1,0 +1,4 @@
+import sharp from 'sharp';
+
+const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="630" fill="#181917"/><path d="M930 120v370M785 305h290" stroke="#41433d"/><circle cx="930" cy="305" r="145" fill="none" stroke="#41433d"/><text x="72" y="105" font-family="sans-serif" font-size="31" fill="#efeee7">shahyan<tspan fill="#ed6546">.</tspan></text><text x="72" y="210" font-family="sans-serif" font-size="21" fill="#c4ccb3">SENIOR ODOO DEVELOPER &amp; SOLUTION CONSULTANT</text><text x="72" y="325" font-family="sans-serif" font-size="76" letter-spacing="-3" fill="#efeee7">Odoo, implemented.</text><text x="72" y="425" font-family="serif" font-style="italic" font-size="72" fill="#efeee7">Built for operations.</text><text x="72" y="550" font-family="sans-serif" font-size="23" fill="#b7b9af">MUHAMMAD SHAHYAN KHALID · ODOO 17–19</text></svg>`;
+await sharp(Buffer.from(svg)).png().toFile('public/og.png');

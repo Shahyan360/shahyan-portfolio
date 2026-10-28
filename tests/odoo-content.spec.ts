@@ -44,9 +44,9 @@ test('implementation boundaries remain explicit across the Odoo stories', async 
   await page.goto('/work/dsl/'); await expect(page.locator('#context')).toContainText('five US companies');
   await page.goto('/work/alam-cotton-mills/'); await expect(page.locator('#coverage')).toContainText('not a complete greenfield implementation');
   await page.goto('/work/laps-education/'); await expect(page.locator('#context')).toContainText('two schools');
-  await page.goto('/work/uae-e-invoicing/'); await expect(page.locator('.scope-note')).toContainText('not independently verified legal compliance');
-  await page.goto('/work/procurement-auditor/'); await expect(page.locator('.project-status')).toContainText('Prototype');
-  await expect(page.locator('#context')).toContainText('intended');
+  await page.goto('/work/uae-e-invoicing/'); await expect(page.locator('.scope-note')).toContainText('not a claim of independently verified legal compliance');
+  await page.goto('/work/procurement-auditor/'); await expect(page.locator('.project-status')).toContainText('Implemented prototype');
+  await expect(page.locator('#context')).toContainText('I implemented');
 });
 
 for (const route of ['/work/unico/', '/work/dsl/', '/work/alam-cotton-mills/', '/work/uae-e-invoicing/', '/work/mxt-manufacturing/', '/work/laps-education/', '/work/procurement-auditor/']) {

@@ -26,3 +26,7 @@ The homepage keeps the three live products and two public-addon highlights promi
 - Added Odoo checks verify private work has no fabricated source/demo links and the procurement project remains labeled as a prototype.
 
 Production verification uses the same suite with `BASE_URL=https://shahyan-khalid-360.vercel.app`; machine-readable browser results are retained locally under ignored `qa/`. Connector validation numbers above describe the user's supplied engineering results, not tests run by the portfolio browser suite.
+
+## Subsequent owner clarification — 28 October 2026
+
+The user confirms that these are implementations they personally completed. The homepage now leads with Odoo, the work collection opens on Odoo, and all seven Odoo pages use Implementation / Implemented by me wording and first-person delivery responsibility. The procurement auditor is described as an implemented prototype rather than a concept. This clarification supersedes earlier plan-only wording, without implying a production rollout for Unico’s pending QuickBooks acceptance or removing existing source authorship/license notices.

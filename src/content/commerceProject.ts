@@ -1,0 +1,47 @@
+import type { Project } from './projects';
+
+export const commerceProject: Project = {
+  slug: 'ecommerce-order-inventory-sync', name: 'Order & Inventory Sync',
+  subtitle: 'One order. A dependable fulfillment path.',
+  category: 'Commerce · n8n automation', domain: 'integrations', automation: true,
+  status: 'Live public simulator · Open source', visualLabel: 'SYNC', color: 'sage',
+  repo: 'n8n-ecommerce-inventory-sync', demo: 'https://n8n-ecommerce-inventory-sync.vercel.app',
+  image: '/images/commerce-overview.webp',
+  imageAlt: 'Commerce Sync public simulator showing fictional orders, stock reservations, shipping quotes, and warehouse availability',
+  imageCaption: 'Actual public demo capture · Fictional browser-session data',
+  description: '13 connected n8n workflows, TypeScript services, and atomic PostgreSQL reservations—with a public simulator for order, inventory, and shipping scenarios.',
+  role: 'I implemented the signed webhook gateway, TypeScript inventory services, PostgreSQL data model and reservation logic, connected n8n workflows, mock-provider stack, and independent public browser simulator.',
+  challenge: 'An order event is not a stock commitment, and a shipping quote is not a shipment. Repeated deliveries, out-of-order updates, and competing allocations need one durable authority for every business transition.',
+  overview: 'Commerce Sync connects Shopify and WooCommerce order events with inventory allocation, Shippo rates, replenishment recommendations, Slack notifications, and reconciliation. The open-source backend includes 13 connected n8n workflows and real PostgreSQL transactions. The hosted website is an independent, credential-free browser simulator: visitors can process fictional orders, replay events, cancel reservations, simulate a carrier failure, race for the final unit, inspect stock, and download workflow JSON.',
+  architecture: ['Signed webhook', 'Durable inbox', 'n8n sub-workflows', 'TypeScript services', 'PostgreSQL authority', 'Quotes / alerts / recovery'],
+  coverage: [
+    { title: 'Explore the public workspace', text: 'The Overview provides order processing, warehouse availability, recent orders, traces, and a mock operations feed. Inventory exposes on-hand, reserved, safety, incoming, and available stock. The searchable library offers 13 downloadable workflows, with setup, architecture, configuration, deployment, and security documentation.' },
+    { title: 'Run the full automation separately', text: 'The Docker stack contains PostgreSQL, persistent Redis queue mode, the n8n main instance and worker, external task runners, a signed ingress gateway, an inventory service, and mock providers. The public Vercel build contains no operational backend, merchant credentials, or n8n administration access.' },
+    { title: 'Keep inventory ownership explicit', text: 'The operational PostgreSQL database owns stock and reservations in this implementation. Every stock writer must use that authority. An externally owned inventory system needs an authoritative atomic reservation adapter; reading its snapshot alone cannot prevent unrelated systems from overselling.' },
+  ],
+  implementation: [
+    { title: 'Accept signed events into a durable inbox', text: 'The Fastify gateway verifies exact-body HMACs, store identity, supported topics, and event IDs before returning 202. PostgreSQL persists the inbox first. Dispatch leases use FOR UPDATE SKIP LOCKED, bounded retries, and a dead-letter state after ten unsuccessful attempts.' },
+    { title: 'Serialize lifecycle updates before touching stock', text: 'Store/order advisory transaction locks, order row locks, current-event ownership, and revision checks protect updates. Older timestamps are ignored; ambiguous equal-time changes are quarantined. Terminal orders do not automatically reopen, and post-fulfillment changes require review.' },
+    { title: 'Allocate atomically across eligible warehouses', text: 'A row-locked transaction locks balances in a consistent product/warehouse order. SKU aliases and duplicate lines resolve to canonical products. Destination eligibility, warehouse priority, safety stock, all-or-nothing rollback, and configured partial allocation govern the commit. Incoming stock contributes to replenishment, not sellable availability.' },
+    { title: 'Handle cancellation, expiry, and fulfillment separately', text: 'Cancellation releases eligible stock once; confirmed provider fulfillment consumes reservations and on-hand units. Default reservation expiry releases the whole unfulfilled order and moves it to Backordered. Partial provider fulfillment keeps stock blocked for accounting review rather than automatically restocking shipped units.' },
+    { title: 'Quote shipping without claiming shipment', text: 'Configured packing and currency/service/transit rules filter persisted Shippo quotes. A returned quote is neither label purchase nor proof that an order shipped. Carrier failures retain the reservation until retry or expiry and create an operational alert. The backend has no label-purchase endpoint.' },
+    { title: 'Use durable outboxes and deterministic replenishment', text: 'Reorder calculations account for incoming units, minimum quantities, and pack multiples. Notification outboxes use semantic keys, leases, and bounded retries; unresolved alerts reuse one record. Slack delivery remains at least once because an ambiguous post-acceptance crash can still duplicate a notification. No supplier purchase orders are issued.' },
+    { title: 'Reconcile with provider history and survive recovery', text: 'Paginated read-only scans retain per-store watermarks and an overlap window. Unsupported bulk cases, unknown mappings, unsafe counts, failed sources, and stuck orders generate review alerts. Persistent PostgreSQL/Redis storage and documented restart/backup drills support recovery beyond a successful workflow execution.' },
+    { title: 'Separate the simulator from backend guarantees', text: 'The browser simulator demonstrates successful and unpaid orders, replay protection, last-unit contention, cancellation, partial allocation, and shipping retry with fictional local state. It does not execute PostgreSQL locking or the live n8n stack. Public files are built from an explicit allowlist, including workflow exports and curated documentation.' },
+  ],
+  acceptance: [
+    { title: 'Recorded backend and Docker verification', text: 'The repository reports 64 backend cases and eight simulator cases passing in Docker-enabled CI run 40619559757 at commit a2bb2f49e6572284dec71624230ebcea0e5e6cb8. I verified that run completed successfully. It covers actual queue-mode mock-provider paths and restart/recovery checks; the result applies to that recorded commit.' },
+    { title: 'Public demo and live-operation boundaries', text: 'The deployed simulator is tested separately from backend concurrency. Real merchant use still requires authorized provider accounts, exclusive inventory ownership or an atomic adapter, carrier/currency policy, TLS, monitoring, backups, and deployment-specific acceptance. Publishing the demo does not activate real fulfillment.' },
+  ],
+  acceptanceIntro: 'Repository verification and public-demo behavior are distinguished from live merchant acceptance. The linked CI result applies to its recorded source commit.',
+  verificationUrl: 'https://github.com/Shahyan360/n8n-ecommerce-inventory-sync/actions/runs/40619559757',
+  screenshots: [
+    { src: '/images/commerce-overview.webp', alt: 'Commerce Sync order-operations simulator with fictional order inputs, warehouse availability, and order states', caption: 'Order operations — fictional orders, stock availability, traces, and rate-recovery scenarios.' },
+    { src: '/images/commerce-inventory.webp', alt: 'Commerce Sync inventory screen showing synthetic warehouse balances and reorder recommendations', caption: 'Inventory — distinguish on-hand, reserved, safety, incoming, and available quantities.' },
+    { src: '/images/commerce-workflows.webp', alt: 'Commerce Sync workflow library with downloadable n8n workflow cards', caption: 'Workflow library — searchable, downloadable JSON for the 13 connected workflows.' },
+  ],
+  outcome: 'A source-verifiable automation stack and an interactive public simulator make the order-to-inventory-to-shipping flow inspectable, including its failure and recovery paths.',
+  scope: 'The public website is a browser-only simulator using fictional session data. Full backend behavior is available in the repository and local Docker/mock stack. It does not connect live stores, buy labels, charge customers, or place supplier orders. Production merchant activation and external inventory authority require separate acceptance; recorded CI evidence is not a blanket production-readiness guarantee.',
+  technologies: ['n8n', 'TypeScript', 'Node.js 24', 'Fastify', 'Zod', 'PostgreSQL', 'Redis', 'Docker Compose', 'Shopify / WooCommerce', 'Shippo', 'Slack Block Kit', 'Vitest'],
+  evidence: 'Public README, architecture, TypeScript gateway/inventory source, 13 workflow exports, test sources, deployment-readiness record, successful GitHub CI run, and the deployed public simulator.',
+};

@@ -29,7 +29,7 @@ export function Header() {
     try { localStorage.setItem('shahyan-mode-v1', next ? 'quick' : 'explore'); } catch { /* Optional preference. */ }
   }
   return <header className="site-header">
-    <Link href="/" className="wordmark">shahyan<span className="brand-dot">.</span><span className="wordmark-caption">ENGINEER & SYSTEMS BUILDER</span><span className="sr-only"> — Home</span></Link>
+    <Link href="/" className="wordmark">shahyan<span className="brand-dot">.</span><span className="wordmark-caption">SENIOR ODOO DEVELOPER</span><span className="sr-only"> — Home</span></Link>
     <nav className="desktop-nav" aria-label="Main navigation">{links.map(([name, href]) => <Link key={href} href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{name}</Link>)}</nav>
     <div className="header-actions"><button className="mode-toggle" aria-pressed={quick} onClick={toggleQuick}><span className="mode-icon" aria-hidden="true">{quick ? '◉' : '◫'}</span> {quick ? 'Explore mode' : 'Quick view'}</button><Link className="header-contact" href="/contact/">Let’s talk <Arrow diagonal /></Link><button ref={menuButton} className="menu-toggle" aria-expanded={menu} aria-controls="mobile-menu" onClick={() => setMenu(!menu)}>{menu ? 'Close −' : 'Menu +'}</button></div>
     {menu && <nav id="mobile-menu" className="mobile-nav" aria-label="Mobile navigation">{[...links, ['Contact', '/contact/']].map(([name, href], i) => <Link href={href} key={href}><span>0{i + 1}</span>{name}<Arrow diagonal /></Link>)}</nav>}

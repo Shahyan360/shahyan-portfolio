@@ -1,6 +1,6 @@
-# Shahyan — Intelligent systems portfolio
+# Shahyan — Senior Odoo Developer portfolio
 
-Complete static Next.js App Router portfolio for Muhammad Shahyan Khalid. Built with React, strict TypeScript, authored CSS, self-hosted fonts and an on-demand Three.js Atlas. No database, API key, tracking service or contact backend is needed.
+Odoo-focused portfolio for Muhammad Shahyan Khalid, Senior Odoo Developer & Solution Consultant. Built with React, strict TypeScript, authored CSS, self-hosted fonts and an on-demand Three.js Atlas. No database, API key, tracking service or contact backend is needed.
 
 ## Run
 
@@ -27,15 +27,15 @@ npm start
 
 Edit `src/content/profile.ts`, `experience.ts`, `projects.ts`, `odooProjects.ts`, `automationProjects.ts`, `skills.ts`, and `achievements.ts`. The same records feed homepage, gallery, case studies and Quick View. Read `PROJECT_INVENTORY.md` before changing attribution, project status, metrics or demo claims. No resume download is published until a current file is validated.
 
-Main products: **Lizz**, **Aster ERP**, **Meridian ERP**. Seven dedicated Odoo case studies cover Unico, DSL Group, Alam Cotton Mills, UAE e-invoicing, MXT manufacturing, LAPS education ERP, and a clearly labeled procurement-auditing prototype. Unico includes the supplied recent QuickBooks configuration, shared status handler, local validation results, clean handoff, and remaining staging/live-acceptance requirements. Playground contains original workflow studies and the local Embodied AI research entry.
+Odoo implementations lead the homepage and the default work filter. The header, hero, About, Contact, SEO/social metadata, and Person job title use the Senior Odoo Developer positioning. Main complementary products: **Lizz**, **Aster ERP**, **Meridian ERP**. Seven Odoo implementation pages cover Unico, DSL Group, Alam Cotton Mills, UAE e-invoicing, MXT manufacturing, LAPS education ERP, and an implemented procurement-auditing prototype. Unico includes the supplied recent QuickBooks configuration, shared status handler, local validation results, clean handoff, and remaining staging/live-acceptance requirements. Playground contains original workflow studies and the local Embodied AI research entry.
 
-Four additional automation case studies cover order/inventory synchronization, AI lead enrichment/CRM scoring, Gmail/Outlook classification, and multi-agent market research. Their implementation is confirmed by the user; technical scope comes from the supplied implementation plans. Dedicated routes are `/work/ecommerce-order-inventory-sync/`, `/work/ai-lead-enrichment-crm-scoring/`, `/work/gmail-outlook-email-classification/`, and `/work/multi-agent-market-research/`. The portfolio now contains 14 project case studies and 20 content routes. Homepage links, an Automation filter, related studies, and Systems Atlas connections make these discoverable. No public workflow endpoint, source repository, or executed acceptance result is invented.
+Four additional automation case studies cover order/inventory synchronization, AI lead enrichment/CRM scoring, Gmail/Outlook classification, and multi-agent market research. Their implementation is confirmed by the user; technical scope comes from the supplied implementation plans. Dedicated routes are `/work/ecommerce-order-inventory-sync/`, `/work/ai-lead-enrichment-crm-scoring/`, `/work/gmail-outlook-email-classification/`, and `/work/multi-agent-market-research/`. The portfolio now contains 14 project case studies and 20 content routes. Homepage links, an Automation filter, related studies, and Systems Atlas connections make these discoverable. Commerce Sync now links to its public repository and live simulator, with three authentic screen captures, recorded CI evidence, and a verified embedded viewer. The other three automation projects retain their supplied implementation-plan evidence boundaries.
 
 ## Embedded live projects
 
 Homepage and product case studies contain real, scrollable iframes with launch, reload, expand, collapse, close and external-opening controls. They load only after visitor activation. A nonce-bound, origin-checked postMessage acknowledgement confirms that meaningful application UI rendered; an iframe load event alone never marks it ready. Unconfirmed loads and offline browsers receive recoverable explanations. The portfolio never proxies credentials or production data. Meridian's website is public; its workspace requires its own owner account.
 
-The application source and Vercel response-header transforms allow framing only by `https://shahyan-khalid-360.vercel.app`, local preview, and each application itself. See `HOSTING.md` for mapping and configuration. A new portfolio domain must be added to the CSP and bridge allowlists. The three application repositories contain the bridge and its focused security tests.
+The application source and Vercel response-header transforms allow framing only by `https://shahyan-khalid-360.vercel.app`, local preview, and each application itself. See `HOSTING.md` for mapping and configuration. A new portfolio domain must be added to the CSP and bridge allowlists. The four application repositories contain the bridge and its focused security tests.
 
 ## Assets
 

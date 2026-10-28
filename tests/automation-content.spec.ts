@@ -18,6 +18,14 @@ test('four independent implementations are discoverable with honest access bound
   const sitemap = await (await request.get('/sitemap.xml')).text();
   for (const route of automationRoutes) {
     await page.goto(route);
+    if (route === automationRoutes[0]) {
+      await expect(page.locator('.case-heading .project-status')).toHaveText('Live public simulator · Open source');
+      await expect(page.getByRole('link', { name: 'View repository', exact: true })).toHaveAttribute('href', 'https://github.com/Shahyan360/n8n-ecommerce-inventory-sync');
+      await expect(page.locator('#acceptance')).toContainText('64 backend cases and eight simulator cases');
+      await expect(page.locator('.related-automation a')).toHaveCount(3);
+      expect(sitemap).toContain(route);
+      continue;
+    }
     await expect(page.locator('.case-heading .project-status')).toHaveText('Automation implementation');
     await expect(page.locator('.live-project, iframe')).toHaveCount(0);
     await expect(page.getByRole('link', { name: 'View repository', exact: true })).toHaveCount(0);

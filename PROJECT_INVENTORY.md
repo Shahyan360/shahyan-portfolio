@@ -70,3 +70,11 @@ The user confirmed building four independent projects from the supplied n8n impl
 | Multi-Agent Market Research | Six specialist roles, bounded collection, evidence IDs, review, JSON/HTML/Gotenberg PDF, Drive delivery and notifications | No actual report, deployed agent URL, performance benchmark, or guaranteed factual accuracy supplied |
 
 Shared foundation: self-hosted n8n, Node.js, Docker, PostgreSQL, JavaScript/TypeScript, protected credentials, recoverable state, and optional Redis/worker scaling. No attribution to an employer or client was added because the supplied plans do not establish one. The previously listed 19 omitted academic/other projects remain omitted; this request authorizes these four additions only.
+
+## Senior Odoo positioning and Commerce Sync — 28 October 2026
+
+The user explicitly confirms that all seven Odoo projects describe their own actual implementations. Public copy now states personal implementation responsibility in first person; Odoo leads the homepage and default work filter. The procurement auditor is an implemented prototype, rather than an unbuilt concept. Existing module authorship/license declarations, private data boundaries, and Unico’s specific pending live acceptance remain accurate.
+
+Commerce Sync is now source-verified against Shahyan360/n8n-ecommerce-inventory-sync, source revision 75c2880 before the embed integration. Its public simulator is https://n8n-ecommerce-inventory-sync.vercel.app. README, architecture, gateway/inventory source, workflow exports, test files, and deployment-readiness documentation were inspected. GitHub CI run 40619559757 completed successfully at a2bb2f49e6572284dec71624230ebcea0e5e6cb8; the repository records 64 backend plus eight simulator cases. These are recorded CI results, not a freshly rerun database suite in this portfolio task.
+
+Three authentic public-demo screens (overview, inventory, workflow library) were captured and optimized to WebP. The existing commerce entry and route are retained; no duplicate project is added. It appears in the Automation collection, Live products filter, and four-product embedded selector. Merchant credentials, real stock, backend runtime, label purchasing, and supplier orders remain disconnected from the browser simulator.

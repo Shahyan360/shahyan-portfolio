@@ -4,6 +4,7 @@ import { automationProjects } from './automationProjects';
 export type Project = {
   slug: string; name: string; subtitle: string; category: string; domain: string; status: string;
   description: string; repo?: string; demo?: string; image?: string; color: string;
+  imageAlt?: string; imageCaption?: string;
   odoo?: boolean; automation?: boolean; visualLabel?: string;
   role: string; challenge: string; overview: string; architecture: string[];
   implementation: { title: string; text: string }[]; outcome: string; scope: string;
@@ -12,6 +13,8 @@ export type Project = {
   validation?: { title: string; text: string }[];
   deliveryNote?: string;
   acceptance?: { title: string; text: string }[];
+  acceptanceIntro?: string; verificationUrl?: string;
+  screenshots?: { src: string; alt: string; caption: string }[];
 };
 export const projects: Project[] = [
   {
