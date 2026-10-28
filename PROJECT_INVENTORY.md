@@ -1,5 +1,23 @@
 # Project inventory
 
+## Current repository mapping — 28 October 2026
+
+Ten newly supplied public Odoo repositories were inspected through README, feature/verification documentation, and Python source. They are independently reconstructed implementations by Muhammad Shahyan Khalid using fictional data and public Odoo Community APIs, not original confidential client source. Their testing/deployment status is distinct from implementation and historical delivery. This update supersedes older statements below that these implementations have no public source link.
+
+| Existing portfolio entry | Newly linked repository implementations |
+| --- | --- |
+| Unico | Financial Automation; CRM & Website Automation; original addon collection retained |
+| DSL Group | CRM & Website Automation; original addon collection retained |
+| Alam Cotton Mills | Shopify Integration; Migration & Optimization; Financial Automation |
+| MXT Manufacturing | MXT Manufacturing ERP |
+| LAPS Education ERP | School ERP; Franchise Management (separately labeled later HQ scope) |
+| UAE E-Invoicing | UAE E-Invoicing |
+| Procurement Auditor | AI Procurement Auditor |
+
+Only Independent Integration Labs is a new entry, at `/work/independent-integration-labs/`. It is personal technical work without client attribution and does not enter the employment implementation list. Total: 15 entries, eight Odoo entries, 21 content routes. See `ODOO_REPOSITORY_UPDATE.md` for source evidence, link locations, and verification.
+
+## Historical inventory
+
 Reviewed 25 October 2026 against the supplied brief and the accessible Shahyan360 repositories. The latest chat instructions override the original brief's broad project list. Public products receive primary placement; professional implementations provide depth.
 
 | Project | Category / status | Technology | Evidence and contribution | Public presentation | Missing information |

@@ -1,5 +1,6 @@
 import { odooProjects } from './odooProjects';
 import { automationProjects } from './automationProjects';
+import type { OdooRepository } from './odooRepositories';
 
 export type Project = {
   slug: string; name: string; subtitle: string; category: string; domain: string; status: string;
@@ -15,6 +16,8 @@ export type Project = {
   acceptance?: { title: string; text: string }[];
   acceptanceIntro?: string; verificationUrl?: string;
   screenshots?: { src: string; alt: string; caption: string }[];
+  repositories?: OdooRepository[];
+  independent?: boolean;
 };
 export const projects: Project[] = [
   {
@@ -73,3 +76,10 @@ export const projects: Project[] = [
   ...automationProjects,
 ];
 export const githubUrl = (project: Project) => project.repo ? `https://github.com/Shahyan360/${project.repo}` : undefined;
+export const projectRepositories = (project: Project) => {
+  const repositories = (project.repositories || []).map(({ repo, label }) => ({ repo, label }));
+  if (project.repo && !repositories.some(repository => repository.repo === project.repo)) {
+    repositories.unshift({ repo: project.repo, label: project.repositories?.length ? 'Existing addon collection' : project.name });
+  }
+  return repositories;
+};

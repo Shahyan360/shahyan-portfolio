@@ -6,6 +6,8 @@ import ProjectVisual from '@/components/ProjectVisual';
 import LiveProject from '@/components/LiveProject';
 import WorkflowExplorer from '@/components/WorkflowExplorer';
 import { Arrow } from '@/components/Arrow';
+import RepositoryLinks from '@/components/RepositoryLinks';
+import RepositoryShowcase from '@/components/RepositoryShowcase';
 
 export function generateStaticParams() { return projects.map(p => ({ slug: p.slug })); }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -32,10 +34,12 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
         {source ? <a className="text-link" href={source} target="_blank" rel="noreferrer">View repository <Arrow diagonal /></a> : <a className="text-link" href="#context">Explore the implementation <Arrow /></a>}
       </div></div>
       {detailedStudy && <nav className="case-section-nav" aria-label="Case study sections">
-        <a href="#context">Context</a>{project.coverage && <a href="#coverage">Functional scope</a>}<a href="#architecture">Architecture</a><a href="#engineering">{slug === 'unico' ? 'Recent QuickBooks work' : 'Engineering'}</a>{project.validation && <a href="#validation">Validation & delivery</a>}{project.acceptance && <a href="#acceptance">Acceptance & recovery</a>}<a href="#outcome">Outcome & scope</a>
+        <a href="#context">Context</a>{project.repositories && <a href="#repositories">GitHub implementations</a>}{project.coverage && <a href="#coverage">Functional scope</a>}<a href="#architecture">Architecture</a><a href="#engineering">{slug === 'unico' ? 'Recent QuickBooks work' : 'Engineering'}</a>{project.validation && <a href="#validation">Validation & delivery</a>}{project.acceptance && <a href="#acceptance">Acceptance & recovery</a>}<a href="#outcome">Outcome & scope</a>
       </nav>}
+      <RepositoryLinks project={project} />
     </section>
     <div className="case-cover section-wrap"><ProjectVisual project={project} priority /></div>
+    <RepositoryShowcase project={project} />
     {project.screenshots && <section className="section-wrap project-screenshots" aria-labelledby="screenshots-title"><div className="section-heading"><span className="eyebrow">THE PUBLIC BUILD / REAL CAPTURES</span><h2 id="screenshots-title">See the<br /><em>working interface.</em></h2><p>Captured from the deployed simulator. All displayed business data is fictional.</p></div><div className="screenshot-grid">{project.screenshots.map(shot => <figure key={shot.src}><a href={shot.src} target="_blank" rel="noreferrer" aria-label={`Open full screenshot: ${shot.caption}`}><img src={shot.src} alt={shot.alt} width="1440" height="1000" loading="lazy" /></a><figcaption>{shot.caption}</figcaption></figure>)}</div></section>}
     {project.demo && <div className="section-wrap live-section" id="live-build"><div className="section-heading"><span className="eyebrow">THE LIVE BUILD</span><h2>Don’t just read it.<br /><em>Experience it.</em></h2><p>Use the project right here,<br />or give it a tab of its own.</p></div><LiveProject name={project.name} url={project.demo} website={slug === 'meridian'} /></div>}
     <section className="case-overview section-wrap" id="context"><div><span className="eyebrow">01 / THE CONTEXT</span><h2>{slug === 'lizz' ? 'From conversation\nto clarity.' : 'The system\nbehind the surface.'}</h2></div><div><p className="large-copy">{project.overview}</p><div className="case-role"><span className="eyebrow">{project.odoo ? 'IMPLEMENTED BY ME' : 'MY ROLE'}</span><p>{project.role}</p></div><div className="tag-list">{project.technologies.map(t => <span key={t}>{t}</span>)}</div></div></section>

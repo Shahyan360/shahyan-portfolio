@@ -7,16 +7,17 @@ test('all Odoo work is discoverable without implying public client access', asyn
   await page.goto('/experience/#implementations');
   const stories = page.locator('.implementation-stories article');
   await expect(stories).toHaveCount(7);
-  for (const link of await stories.locator('a').all()) {
+  for (const link of await stories.locator('a[href^="/"]').all()) {
     const href = await link.getAttribute('href');
     expect((await request.get(href!)).status()).toBe(200);
   }
   for (const slug of privateStudies) {
     await page.goto(`/work/${slug}/`);
     await expect(page.locator('.live-project, iframe')).toHaveCount(0);
-    await expect(page.getByRole('link', { name: 'View repository', exact: true })).toHaveCount(0);
-    await expect(page.locator('.scope-note')).toContainText(/private|prototype|No client database/i);
-    await expect(page.locator('.related-odoo a')).toHaveCount(6);
+    await expect(page.getByRole('link', { name: 'View repository', exact: true })).toHaveCount(1);
+    await expect(page.locator('#repositories')).toContainText('independently reconstructed');
+    await expect(page.locator('.scope-note')).toContainText(/private|prototype|confidential/i);
+    await expect(page.locator('.related-odoo a')).toHaveCount(7);
   }
   const sitemap = await request.get('/sitemap.xml');
   for (const slug of privateStudies) expect(await sitemap.text()).toContain(`/work/${slug}/`);
@@ -49,7 +50,7 @@ test('implementation boundaries remain explicit across the Odoo stories', async 
   await expect(page.locator('#context')).toContainText('I implemented');
 });
 
-for (const route of ['/work/unico/', '/work/dsl/', '/work/alam-cotton-mills/', '/work/uae-e-invoicing/', '/work/mxt-manufacturing/', '/work/laps-education/', '/work/procurement-auditor/']) {
+for (const route of ['/work/unico/', '/work/dsl/', '/work/alam-cotton-mills/', '/work/uae-e-invoicing/', '/work/mxt-manufacturing/', '/work/laps-education/', '/work/procurement-auditor/', '/work/independent-integration-labs/']) {
   test(`Odoo case study accessibility ${route}`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(route);

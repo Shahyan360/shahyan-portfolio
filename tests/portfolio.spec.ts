@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-const routes = ['/', '/work/', '/about/', '/experience/', '/playground/', '/contact/', '/work/lizz/', '/work/aster/', '/work/meridian/', '/work/unico/', '/work/dsl/', '/work/alam-cotton-mills/', '/work/uae-e-invoicing/', '/work/mxt-manufacturing/', '/work/laps-education/', '/work/procurement-auditor/', '/work/ecommerce-order-inventory-sync/', '/work/ai-lead-enrichment-crm-scoring/', '/work/gmail-outlook-email-classification/', '/work/multi-agent-market-research/'];
+const routes = ['/', '/work/', '/about/', '/experience/', '/playground/', '/contact/', '/work/lizz/', '/work/aster/', '/work/meridian/', '/work/unico/', '/work/dsl/', '/work/alam-cotton-mills/', '/work/uae-e-invoicing/', '/work/mxt-manufacturing/', '/work/laps-education/', '/work/procurement-auditor/', '/work/independent-integration-labs/', '/work/ecommerce-order-inventory-sync/', '/work/ai-lead-enrichment-crm-scoring/', '/work/gmail-outlook-email-classification/', '/work/multi-agent-market-research/'];
 
 test('all routes load directly with metadata, content and no browser errors', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
@@ -16,9 +16,9 @@ for (const width of [320, 390, 768, 1440]) {
 }
 
 test('project filters return the intended curated collection', async ({ page }) => {
-  await page.goto('/work/'); await expect(page.locator('.project-card')).toHaveCount(7); await page.getByRole('button', { name: 'All work' }).click(); await expect(page.locator('.project-card')).toHaveCount(14);
+  await page.goto('/work/'); await expect(page.locator('.project-card')).toHaveCount(8); await page.getByRole('button', { name: 'All work' }).click(); await expect(page.locator('.project-card')).toHaveCount(15);
   await page.getByRole('button', { name: 'Live products' }).click(); await expect(page.locator('.project-card')).toHaveCount(4);
-  await page.getByRole('button', { name: /^Odoo/ }).click(); await expect(page.locator('.project-card')).toHaveCount(7);
+  await page.getByRole('button', { name: /^Odoo/ }).click(); await expect(page.locator('.project-card')).toHaveCount(8);
   await page.getByRole('button', { name: /^AI/ }).click(); await expect(page.locator('.project-card')).toHaveCount(5); await expect(page.locator('.project-card h3')).toHaveText(['Lizz', 'Procurement Auditor', 'AI Lead Enrichment', 'Gmail & Outlook Classification', 'Multi-Agent Market Research']);
 });
 
@@ -65,7 +65,7 @@ test('native navigation reaches case studies and returns without prefetch failur
   const failures: string[] = []; page.on('response', response => { if (response.status() >= 400 && response.url().startsWith(baseURL!)) failures.push(response.url()); });
   await page.goto('/'); await page.getByRole('link', { name: 'Explore my work', exact: true }).click(); await expect(page).toHaveURL(/\/work\/$/);
   await page.getByRole('button', { name: 'All work' }).click(); await page.getByRole('link', { name: 'Explore project: Lizz case study', exact: true }).click(); await expect(page.locator('h1')).toHaveText('Lizz.');
-  await page.getByRole('link', { name: 'All work', exact: false }).click(); await expect(page.locator('.project-card')).toHaveCount(7); expect(failures).toEqual([]);
+  await page.getByRole('link', { name: 'All work', exact: false }).click(); await expect(page.locator('.project-card')).toHaveCount(8); expect(failures).toEqual([]);
 });
 
 for (const route of ['/', '/about/', '/work/', '/contact/', '/playground/', '/work/lizz/', '/experience/']) {

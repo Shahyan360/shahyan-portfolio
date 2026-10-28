@@ -12,7 +12,7 @@ test('Senior Odoo positioning leads the portfolio and attributes delivered imple
   expect(person.jobTitle).toBe('Senior Odoo Developer & Solution Consultant');
   await page.goto('/work/');
   await expect(page.getByRole('button', { name: /^Odoo/ })).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('.project-card')).toHaveCount(7);
+  await expect(page.locator('.project-card')).toHaveCount(8);
   for (const slug of odooSlugs) {
     await page.goto(`/work/${slug}/`);
     await expect(page.locator('.case-role')).toContainText('IMPLEMENTED BY ME');

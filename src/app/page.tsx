@@ -14,8 +14,8 @@ import { capabilities } from '@/content/skills';
 export const metadata: Metadata = { alternates: { canonical: '/' } };
 export default function Home() {
   const products = ['lizz', 'aster', 'meridian'].map(slug => projects.find(p => p.slug === slug)!);
-  const enterprise = projects.filter(p => p.odoo && p.repo);
-  const moreOdoo = projects.filter(p => p.odoo && !p.repo);
+  const enterprise = ['unico', 'dsl'].map(slug => projects.find(p => p.slug === slug)!);
+  const moreOdoo = projects.filter(p => p.odoo && !['unico', 'dsl'].includes(p.slug));
   const automations = projects.filter(p => p.automation);
   return <>
     <Hero />
