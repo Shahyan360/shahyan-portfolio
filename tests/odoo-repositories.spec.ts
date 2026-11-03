@@ -68,6 +68,14 @@ test('repository actions are available in homepage and experience summaries', as
   await expect(page.locator('#selected-work .project-card')).toHaveCount(2);
   await expect(page.locator('.project-unico .repository-links a')).toHaveCount(3);
   await expect(page.locator('.project-dsl .repository-links a')).toHaveCount(2);
+  const mediumCards = page.locator('.more-odoo .odoo-medium-card');
+  await expect(mediumCards).toHaveCount(6);
+  for (const { slug } of mappings.filter(mapping => !['unico', 'dsl'].includes(mapping.slug))) {
+    const card = page.locator(`.medium-${slug}`);
+    await expect(card.getByRole('link', { name: 'View implementation', exact: true })).toHaveAttribute('href', `/work/${slug}/`);
+    await expect(card.getByRole('link', { name: /on GitHub$/ })).toHaveAttribute('href', /^https:\/\/github.com\/Shahyan360\//);
+  }
+  await expect(page.locator('.medium-laps-education').getByRole('link', { name: 'Explore all 2 repositories' })).toHaveAttribute('href', '/work/laps-education/#repositories');
   await page.goto('/experience/');
   for (const { slug, repos } of mappings.filter(mapping => mapping.slug !== 'independent-integration-labs')) {
     const story = page.locator('.implementation-stories article').filter({ has: page.locator(`a[href="/work/${slug}/"]`) });

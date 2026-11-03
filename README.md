@@ -72,3 +72,7 @@ Run the same browser suite against production by setting the non-secret `BASE_UR
 - `HOSTING.md`: hosting and exact-origin embed configuration.
 - `VERIFICATION.md`: results and remaining verification limits.
 - `PRODUCTION_FIX_REPORT.md`: production root causes, corrected mapping, releases and reliability verification.
+
+## Medium Odoo cards — 3 November 2026
+
+The homepage now presents the six additional Odoo entries as medium cards rather than text rows. Each card reuses the existing conceptual visual system, description and implementation status, with native detail/GitHub actions. Alam and LAPS additionally link to their grouped repository sections. Unico and DSL remain the two larger featured cards. The grid uses three desktop, two tablet and one mobile column; Quick View hides decorative panels. Existing project data and Work/detail layouts are unchanged.

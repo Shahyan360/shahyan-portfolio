@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import LiveGallery from '@/components/LiveGallery';
 import ProjectCard from '@/components/ProjectCard';
+import OdooMediumCard from '@/components/OdooMediumCard';
 import SystemsAtlas from '@/components/SystemsAtlas';
 import ExperienceList from '@/components/ExperienceList';
 import { ContactFinale } from '@/components/Shell';
@@ -24,7 +25,7 @@ export default function Home() {
     <section id="selected-work" className="selected-work section-wrap" aria-labelledby="work-title">
       <div className="section-heading"><span className="eyebrow">01 / ODOO IMPLEMENTATIONS</span><h2 id="work-title">Implemented by me.<br /><em>Built for the business.</em></h2><div><p>Odoo delivery across distribution, manufacturing, multi-company operations, education, and financial integrations.</p><Link className="text-link" href="/work/">Explore my implementations <Arrow diagonal /></Link></div></div>
       <div className="enterprise-grid">{enterprise.map((p, i) => <ProjectCard project={p} index={i} key={p.slug} />)}</div>
-      <div className="more-odoo"><span className="eyebrow">MORE OF MY ODOO IMPLEMENTATIONS</span><div className="odoo-project-links">{moreOdoo.map(p => <Link key={p.slug} href={`/work/${p.slug}/`}><span>{p.name}<small>{p.category}</small></span><Arrow diagonal /></Link>)}</div></div>
+      <div className="more-odoo"><span className="eyebrow">MORE OF MY ODOO IMPLEMENTATIONS</span><div className="odoo-medium-grid">{moreOdoo.map(project => <OdooMediumCard key={project.slug} project={project} />)}</div></div>
     </section>
     <section className="selected-work section-wrap" id="product-work" aria-labelledby="products-title"><div className="section-heading"><span className="eyebrow">CONNECTED PRODUCTS / AI & WEB</span><h2 id="products-title">Beyond the ERP.<br /><em>The same systems thinking.</em></h2><p>Explore the AI and full-stack products that complement my implementation work.</p></div><div className="featured-grid">{products.map((p, i) => <ProjectCard project={p} index={i + 2} key={p.slug} />)}</div></section>
     <section className="section-wrap supporting-product" aria-labelledby="document-work-title"><span className="eyebrow">SUPPORTING WORK / DOCUMENT AUTOMATION</span><h3 id="document-work-title">InvoiceOCR</h3><p>A Think AI Works internship project connecting invoice OCR, structured extraction, validation, and human review. A separate Python application supporting my wider work in financial systems.</p><Link className="text-link" href="/work/invoiceocr/">Explore InvoiceOCR <Arrow diagonal /></Link></section>
