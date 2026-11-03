@@ -1,5 +1,11 @@
 # Project inventory
 
+## Implementation depth update — 3 November 2026
+
+The latest owner-supplied master records and explicit approval extend existing Odoo stories: Unico remediation/operational controls, MXT production/costing, LAPS administration, and consulting delivery. UAE accounting/e-invoicing is associated with both MXT and Alam, while the modern public validation adapters retain a separate scope. The owner now supplies graduation in June 2026, superseding the earlier no-date education note below.
+
+InvoiceOCR is newly included as a supporting Think AI Works internship project after README/source review. It has a direct GitHub link and no live-runtime or independently verified test-count claim. Sixteen entries / twenty-two content routes; eight Odoo entries remain the default collection. See `ODOO_DEPTH_UPDATE.md` for detailed scope and evidence.
+
 ## Current repository mapping — 28 October 2026
 
 Ten newly supplied public Odoo repositories were inspected through README, feature/verification documentation, and Python source. They are independently reconstructed implementations by Muhammad Shahyan Khalid using fictional data and public Odoo Community APIs, not original confidential client source. Their testing/deployment status is distinct from implementation and historical delivery. This update supersedes older statements below that these implementations have no public source link.

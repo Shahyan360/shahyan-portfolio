@@ -1,6 +1,7 @@
 import { odooProjects } from './odooProjects';
 import { automationProjects } from './automationProjects';
 import type { OdooRepository } from './odooRepositories';
+import { invoiceOcrProject } from './invoiceOcrProject';
 
 export type Project = {
   slug: string; name: string; subtitle: string; category: string; domain: string; status: string;
@@ -18,6 +19,7 @@ export type Project = {
   screenshots?: { src: string; alt: string; caption: string }[];
   repositories?: OdooRepository[];
   independent?: boolean;
+  operationalWork?: { title: string; text: string }[];
 };
 export const projects: Project[] = [
   {
@@ -74,6 +76,7 @@ export const projects: Project[] = [
   },
   ...odooProjects.slice(1),
   ...automationProjects,
+  invoiceOcrProject,
 ];
 export const githubUrl = (project: Project) => project.repo ? `https://github.com/Shahyan360/${project.repo}` : undefined;
 export const projectRepositories = (project: Project) => {

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-const routes = ['/', '/work/', '/about/', '/experience/', '/playground/', '/contact/', '/work/lizz/', '/work/aster/', '/work/meridian/', '/work/unico/', '/work/dsl/', '/work/alam-cotton-mills/', '/work/uae-e-invoicing/', '/work/mxt-manufacturing/', '/work/laps-education/', '/work/procurement-auditor/', '/work/independent-integration-labs/', '/work/ecommerce-order-inventory-sync/', '/work/ai-lead-enrichment-crm-scoring/', '/work/gmail-outlook-email-classification/', '/work/multi-agent-market-research/'];
+const routes = ['/', '/work/', '/about/', '/experience/', '/playground/', '/contact/', '/work/lizz/', '/work/aster/', '/work/meridian/', '/work/unico/', '/work/dsl/', '/work/alam-cotton-mills/', '/work/uae-e-invoicing/', '/work/mxt-manufacturing/', '/work/laps-education/', '/work/procurement-auditor/', '/work/independent-integration-labs/', '/work/invoiceocr/', '/work/ecommerce-order-inventory-sync/', '/work/ai-lead-enrichment-crm-scoring/', '/work/gmail-outlook-email-classification/', '/work/multi-agent-market-research/'];
 
 test('all routes load directly with metadata, content and no browser errors', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
@@ -16,10 +16,10 @@ for (const width of [320, 390, 768, 1440]) {
 }
 
 test('project filters return the intended curated collection', async ({ page }) => {
-  await page.goto('/work/'); await expect(page.locator('.project-card')).toHaveCount(8); await page.getByRole('button', { name: 'All work' }).click(); await expect(page.locator('.project-card')).toHaveCount(15);
+  await page.goto('/work/'); await expect(page.locator('.project-card')).toHaveCount(8); await page.getByRole('button', { name: 'All work' }).click(); await expect(page.locator('.project-card')).toHaveCount(16);
   await page.getByRole('button', { name: 'Live products' }).click(); await expect(page.locator('.project-card')).toHaveCount(4);
   await page.getByRole('button', { name: /^Odoo/ }).click(); await expect(page.locator('.project-card')).toHaveCount(8);
-  await page.getByRole('button', { name: /^AI/ }).click(); await expect(page.locator('.project-card')).toHaveCount(5); await expect(page.locator('.project-card h3')).toHaveText(['Lizz', 'Procurement Auditor', 'AI Lead Enrichment', 'Gmail & Outlook Classification', 'Multi-Agent Market Research']);
+  await page.getByRole('button', { name: /^AI/ }).click(); await expect(page.locator('.project-card')).toHaveCount(6); await expect(page.locator('.project-card h3')).toHaveText(['Lizz', 'Procurement Auditor', 'AI Lead Enrichment', 'Gmail & Outlook Classification', 'Multi-Agent Market Research', 'InvoiceOCR']);
 });
 
 test('atlas switches domains and retains conventional case-study links', async ({ page }) => {
@@ -50,9 +50,10 @@ test('contact uses working mail and telephone targets without false form success
   await page.goto('/contact/'); await expect(page.getByRole('link', { name: 'Write me an email' })).toHaveAttribute('href', /^mailto:khalidshahyan0@gmail.com/); await expect(page.getByRole('link', { name: '+92 327 0268858' })).toHaveAttribute('href', 'tel:+923270268858'); await expect(page.locator('form')).toHaveCount(0);
 });
 
-test('education has no invented graduation date and portrait is limited to home/about', async ({ page }) => {
+test('education uses the owner-confirmed graduation date and portrait is limited to home/about', async ({ page }) => {
   for (const route of routes) { await page.goto(route); const portrait = page.locator('img[alt="Muhammad Shahyan Khalid in a navy blazer and glasses"]'); await expect(portrait).toHaveCount(['/', '/about/'].includes(route) ? 1 : 0); }
-  await page.goto('/about/'); await expect(page.locator('.education-section')).not.toContainText(/expected|graduated|202[0-9]/i);
+  await page.goto('/about/'); await expect(page.locator('.education-section')).toContainText('Graduated June 2026');
+  await expect(page.locator('.education-section time')).toHaveAttribute('dateTime', '2026-06');
 });
 
 test('internal links resolve to exported routes', async ({ page, request }) => {
